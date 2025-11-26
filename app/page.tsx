@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Script from "next/script";
 import { useEffect, useState } from "react";
 
 type DemoTab = "strategy" | "content" | "analytics";
@@ -92,11 +93,17 @@ export default function MarketingHome() {
     },
   };
 
+  /* ============================= */
+  /* WAITLIST FORM STATE           */
+  /* ============================= */
+  const [showWaitlist, setShowWaitlist] = useState(false);
+
   return (
     <main
       className="min-h-screen bg-white relative overflow-hidden flex flex-col"
       onMouseMove={handleMouseMove}
     >
+
       {/* ================================================== */}
       {/* BACKGROUND GLOWS + WAVE + PARTICLES + SPOTLIGHT   */}
       {/* ================================================== */}
@@ -161,8 +168,6 @@ export default function MarketingHome() {
         <div className="text-4xl font-extrabold tracking-tight text-[#0A0A0A]">
           Mark
         </div>
-
-{/* Temporarily removed Sign In button for public landing launch */}
       </nav>
 
       {/* ================================================== */}
@@ -196,7 +201,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ================================================== */}
-      {/* FEATURES — SCROLL REVEAL + 3D TILT */}
+      {/* FEATURES */}
       {/* ================================================== */}
       <section className="px-8 py-28 max-w-6xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
         <div className="reveal">
@@ -222,7 +227,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ================================================== */}
-      {/* INTERACTIVE DEMO PREVIEW */}
+      {/* DEMO PREVIEW */}
       {/* ================================================== */}
       <section className="px-8 py-24 max-w-4xl mx-auto relative z-10 reveal">
         <h2 className="text-4xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-4">
@@ -233,7 +238,9 @@ export default function MarketingHome() {
           place.
         </p>
 
+        {/* Demo Container */}
         <div className="mt-10 bg-white/80 backdrop-blur-md border border-black/5 rounded-3xl shadow-lg p-6 md:p-8">
+
           {/* Tabs */}
           <div className="flex flex-wrap gap-2 text-xs font-medium text-black/70 mb-6">
             {(["strategy", "content", "analytics"] as DemoTab[]).map((tab) => (
@@ -253,7 +260,7 @@ export default function MarketingHome() {
             ))}
           </div>
 
-          {/* Fake conversation */}
+          {/* Conversation */}
           <div className="space-y-4 text-sm leading-relaxed">
             {/* User bubble */}
             <div className="flex justify-end">
@@ -261,6 +268,7 @@ export default function MarketingHome() {
                 {demoContent[demoTab].user}
               </div>
             </div>
+
             {/* Mark bubble */}
             <div className="flex justify-start">
               <div className="rounded-2xl bg-[#FFF3E8] border border-[#FFD0A3] text-[#3A1A00] px-4 py-3 max-w-[85%] shadow-sm">
@@ -272,24 +280,80 @@ export default function MarketingHome() {
       </section>
 
       {/* ================================================== */}
-      {/* GLOWING CTA SECTION + MAGNETIC BUTTON */}
+      {/* CTA SECTION (CUSTOM CONVERTKIT FORM + REDIRECT) */}
       {/* ================================================== */}
       <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FF3E00] p-[1px] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
           <div className="bg-[#050505] rounded-3xl px-10 py-10 md:px-12 md:py-12 text-center text-white relative">
             <div className="absolute inset-0 opacity-40 blur-3xl bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.28),transparent_60%)] pointer-events-none" />
+
             <div className="relative">
               <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
                 A new way to run your marketing.
               </h3>
+
               <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
-                Be one of the first to plug your brand into Mark and turn chaos
-                into a clear, repeatable marketing system.
+                Be one of the first to plug your brand into Mark and turn chaos into a clear,
+                repeatable marketing system.
               </p>
 
-              <MagneticButton>
-                Join the early access list
-              </MagneticButton>
+              <div className="flex flex-col items-center">
+
+                {/* CTA BUTTON */}
+                <MagneticButton onClick={() => setShowWaitlist(!showWaitlist)}>
+                  <span className="text-white">
+                    {showWaitlist ? "Hide form" : "Join the early access list"}
+                  </span>
+                </MagneticButton>
+
+                {/* EXPANDING CUSTOM FORM */}
+                <div
+                  className={`transition-all duration-700 overflow-hidden ${
+                    showWaitlist ? "max-h-[500px] mt-6" : "max-h-0"
+                  }`}
+                >
+                  <form
+                    action="https://app.kit.com/forms/8813748/subscriptions"
+                    method="post"
+                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
+                  >
+
+                    {/* 🔥 REDIRECT TO USEMARK.APP/THANK-YOU */}
+                    <input
+                      type="hidden"
+                      name="redirect_url"
+                      value="https://usemark.app/thank-you"
+                    />
+
+                    {/* First Name */}
+                    <input
+                      type="text"
+                      name="fields[first_name]"
+                      placeholder="First Name"
+                      className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                      required
+                    />
+
+                    {/* Email */}
+                    <input
+                      type="email"
+                      name="email_address"
+                      placeholder="Email Address"
+                      className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                      required
+                    />
+
+                    {/* Submit */}
+                    <button
+                      type="submit"
+                      className="w-full py-3 bg-[#FF6A1A] hover:bg-[#ff7e3a] transition text-white font-semibold rounded-lg shadow-lg"
+                    >
+                      Join Early Access
+                    </button>
+
+                  </form>
+                </div>
+              </div>
 
               <p className="mt-3 text-[11px] text-white/50">
                 No spam. You’ll only hear from me when Mark is ready for you.
@@ -335,7 +399,7 @@ export default function MarketingHome() {
 }
 
 /* ================================================== */
-/* 3D Tilt Feature Card */
+/* FEATURE CARD */
 /* ================================================== */
 
 function FeatureCard({ title, desc }: { title: string; desc: string }) {
@@ -355,10 +419,16 @@ function FeatureCard({ title, desc }: { title: string; desc: string }) {
 }
 
 /* ================================================== */
-/* MAGNETIC CTA BUTTON */
+/* MAGNETIC BUTTON */
 /* ================================================== */
 
-function MagneticButton({ children }: { children: React.ReactNode }) {
+function MagneticButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -378,6 +448,7 @@ function MagneticButton({ children }: { children: React.ReactNode }) {
 
   return (
     <button
+      onClick={onClick}
       className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
       style={{
         transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,

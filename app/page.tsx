@@ -162,12 +162,7 @@ export default function MarketingHome() {
           Mark
         </div>
 
-        <Link
-          href="/auth/sign-in"
-          className="px-5 py-2 border border-black/10 rounded-md text-sm font-medium hover:bg-black/5 transition"
-        >
-          Sign In
-        </Link>
+{/* Temporarily removed Sign In button for public landing launch */}
       </nav>
 
       {/* ================================================== */}

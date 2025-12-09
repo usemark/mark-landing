@@ -282,6 +282,11 @@ export default function MarketingHome() {
             >
               Join Early Access
             </button>
+
+            {/* No spam text */}
+            <p className="text-[11px] text-white/50 text-center">
+              No spam. You'll only hear from me when Mark is ready for you.
+            </p>
           </form>
         </div>
 

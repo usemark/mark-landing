@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
@@ -81,11 +82,11 @@ export default function MarketingHome() {
   const demoContent: Record<DemoTab, { user: string; mark: string }> = {
     strategy: {
       user: "Give me a 7-day content game plan to relaunch my brand on TikTok.",
-      mark: "Here’s a 7-day relaunch sprint: Day 1 – Origin story video, Day 2 – Problem & promise, Day 3 – Quick win tutorial, Day 4 – Blind reaction / stitch, Day 5 – Results or proof, Day 6 – Behind-the-scenes process, Day 7 – Recap + call to action. I’ll script each one and keep them in a single thread so you never lose the plan.",
+      mark: "Here's a 7-day relaunch sprint: Day 1: Origin story video, Day 2: Problem & promise, Day 3: Quick win tutorial, Day 4: Blind reaction / stitch, Day 5: Results or proof, Day 6: Behind-the-scenes process, Day 7: Recap + call to action. I'll script each one and keep them in a single thread so you never lose the plan.",
     },
     content: {
       user: "Write a bold hook and caption for a TikTok about turning chaos into a marketing system.",
-      mark: "Hook: “Your marketing isn’t failing… it’s just scattered.” Caption: “Most creators don’t need more ideas—they need a system that turns ideas into content on repeat. Here’s how I’d turn your chaos into a weekly content engine 👇” Then add 3–5 punchy bullet points and a soft CTA to your offer or waitlist.",
+      mark: "Hook: 'Your marketing isn't failing, it's just scattered.' Caption: 'Most creators don't need more ideas. They need a system that turns ideas into content on repeat. Here's how I'd turn your chaos into a weekly content engine 👇' Then add 3 to 5 punchy bullet points and a soft CTA to your offer or waitlist.",
     },
     analytics: {
       user: "Look at my last 20 posts and tell me what’s actually working.",
@@ -165,9 +166,14 @@ export default function MarketingHome() {
       {/* NAVBAR */}
       {/* ================================================== */}
       <nav className="w-full flex justify-between items-center px-8 py-6 border-b bg-white/70 backdrop-blur-lg relative z-10">
-        <div className="text-4xl font-extrabold tracking-tight text-[#0A0A0A]">
-          Mark
-        </div>
+        <Image
+          src="/mark-logo.png"
+          alt="Mark Logo"
+          width={80}
+          height={26}
+          className="object-contain"
+          priority
+        />
       </nav>
 
       {/* ================================================== */}
@@ -180,20 +186,71 @@ export default function MarketingHome() {
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          Your all-in-one AI Marketing Assistant—built for creators, founders,
+          Your all-in-one AI Marketing Assistant built for creators, founders,
           and businesses who want clarity, consistency, and speed.
         </p>
 
-        <p className="mt-3 text-sm text-black/60 italic">
-          Early access waitlist opening soon.
-        </p>
+        {/* CTA BUTTON */}
+        <div className="mt-8 flex justify-center">
+          <MagneticButton onClick={() => setShowWaitlist(!showWaitlist)}>
+            <span className="text-white">
+              Join the early access list
+            </span>
+          </MagneticButton>
+        </div>
+
+        {/* EXPANDING FORM */}
+        <div
+          className={`transition-all duration-700 overflow-hidden ${
+            showWaitlist ? "max-h-[500px] mt-6" : "max-h-0"
+          }`}
+        >
+          <form
+            action="https://app.kit.com/forms/8813748/subscriptions"
+            method="post"
+            className="bg-white/80 backdrop-blur-xl border border-white/40 rounded-2xl p-6 max-w-md mx-auto w-full space-y-4 shadow-xl"
+          >
+            {/* Redirect to thank-you page */}
+            <input
+              type="hidden"
+              name="redirect_url"
+              value="https://usemark.app/thank-you"
+            />
+
+            {/* First Name */}
+            <input
+              type="text"
+              name="fields[first_name]"
+              placeholder="First Name"
+              className="w-full px-4 py-3 rounded-lg bg-white border border-black/10 text-black placeholder-black/40 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+              required
+            />
+
+            {/* Email */}
+            <input
+              type="email"
+              name="email_address"
+              placeholder="Email Address"
+              className="w-full px-4 py-3 rounded-lg bg-white border border-black/10 text-black placeholder-black/40 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+              required
+            />
+
+            {/* Submit */}
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#FF6A1A] hover:bg-[#ff7e3a] transition text-white font-semibold rounded-lg shadow-lg"
+            >
+              Join Early Access
+            </button>
+          </form>
+        </div>
 
         {/* GLASS CARD */}
         <div className="mt-20 flex justify-center">
           <div className="backdrop-blur-xl bg-white/30 border border-white/50 shadow-xl rounded-3xl px-12 py-10 max-w-xl animate-fade-in-up">
             <p className="text-lg text-[#0A0A0A] leading-relaxed font-medium">
-              Mark is built to feel like a true teammate — one that understands
-              your brand, your voice, and your goals… and helps you create
+              Mark is built to feel like a true teammate, one that understands
+              your brand, your voice, and your goals, and helps you create
               faster, smarter, and with total clarity.
             </p>
           </div>
@@ -214,14 +271,14 @@ export default function MarketingHome() {
         <div className="reveal delay-1">
           <FeatureCard
             title="Brand-Aware Intelligence"
-            desc="Mark learns your tone, goals, and audience—automatically generating content aligned with your identity."
+            desc="Mark learns your tone, goals, and audience, automatically generating content aligned with your identity."
           />
         </div>
 
         <div className="reveal delay-2">
           <FeatureCard
             title="Unified Marketing OS"
-            desc="A single workspace for content, insights, automations, and planning—built for speed and simplicity."
+            desc="A single workspace for content, insights, automations, and planning built for speed and simplicity."
           />
         </div>
       </section>
@@ -372,27 +429,25 @@ export default function MarketingHome() {
         </h2>
 
         <p className="text-lg text-black/70 leading-relaxed font-medium">
-          Hey — I’m Brendan. I’m building Mark because marketing shouldn’t feel
+          Hey, I'm Brendan. I'm building Mark because marketing shouldn't feel
           overwhelming or scattered across dozens of tools. I wanted a system
           that helps creators and businesses move faster, stay consistent, and
           grow without chaos.
         </p>
 
         <p className="text-lg text-black/70 leading-relaxed mt-4 font-medium">
-          Mark is designed to feel human — a teammate who understands your brand,
+          Mark is designed to feel human, a teammate who understands your brand,
           your goals, and how to help you move forward every day.
         </p>
 
-        <p className="text-sm text-black/60 italic mt-6">
-          Early access waitlist launching soon.
-        </p>
+
       </section>
 
       {/* ================================================== */}
       {/* FOOTER */}
       {/* ================================================== */}
       <footer className="px-8 py-12 border-t text-center text-sm text-black/60 relative z-10">
-        © {new Date().getFullYear()} Mark — Built in public by Brendan Goforth
+        © {new Date().getFullYear()} Mark. Built in public by Brendan Goforth.
       </footer>
     </main>
   );

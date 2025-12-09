@@ -193,9 +193,11 @@ export default function MarketingHome() {
         <div className="mt-8 flex justify-center">
           <button
             onClick={() => setShowWaitlist(!showWaitlist)}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight rounded-full bg-gradient-to-br from-[#FF6A1A] to-[#FF3E00] text-white transition-all hover:shadow-[0_0_30px_rgba(255,106,26,0.6)] hover:scale-105"
+            className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
           >
-            <span>Join the early access list</span>
+            <span className="text-white">
+              {showWaitlist ? "Hide form" : "Join the early access list"}
+            </span>
           </button>
         </div>
 
@@ -208,7 +210,7 @@ export default function MarketingHome() {
           <form
             action="https://app.kit.com/forms/8813748/subscriptions"
             method="post"
-            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
+            className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
           >
             {/* Redirect to thank-you page */}
             <input

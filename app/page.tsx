@@ -99,6 +99,20 @@ export default function MarketingHome() {
   /* ============================= */
   const [showWaitlist, setShowWaitlist] = useState(false);
 
+  const toggleWaitlist = (buttonRef: HTMLButtonElement | null) => {
+    setShowWaitlist(!showWaitlist);
+    
+    // Scroll to keep the button in view after the form expands/collapses
+    if (!showWaitlist && buttonRef) {
+      setTimeout(() => {
+        buttonRef.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    }
+  };
+
   return (
     <main
       className="min-h-screen bg-white relative overflow-hidden flex flex-col"
@@ -192,7 +206,7 @@ export default function MarketingHome() {
         {/* CTA BUTTON */}
         <div className="mt-8 flex justify-center">
           <button
-            onClick={() => setShowWaitlist(!showWaitlist)}
+            onClick={(e) => toggleWaitlist(e.currentTarget)}
             className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
           >
             <span className="text-white">
@@ -368,7 +382,9 @@ export default function MarketingHome() {
               <div className="flex flex-col items-center">
 
                 {/* CTA BUTTON */}
-                <MagneticButton onClick={() => setShowWaitlist(!showWaitlist)}>
+                <MagneticButton 
+                  onClick={(buttonElement) => toggleWaitlist(buttonElement)}
+                >
                   <span className="text-white">
                     {showWaitlist ? "Hide form" : "Join the early access list"}
                   </span>
@@ -502,7 +518,7 @@ function MagneticButton({
   onClick,
 }: {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (buttonElement: HTMLButtonElement | null) => void;
 }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
@@ -521,9 +537,15 @@ function MagneticButton({
     setOffset({ x: 0, y: 0 });
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick(e.currentTarget);
+    }
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
       style={{
         transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,

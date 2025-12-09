@@ -97,13 +97,28 @@ export default function MarketingHome() {
   /* ============================= */
   /* WAITLIST FORM STATE           */
   /* ============================= */
-  const [showWaitlist, setShowWaitlist] = useState(false);
+  const [showHeroWaitlist, setShowHeroWaitlist] = useState(false);
+  const [showCtaWaitlist, setShowCtaWaitlist] = useState(false);
 
-  const toggleWaitlist = (buttonRef: HTMLButtonElement | null) => {
-    setShowWaitlist(!showWaitlist);
+  const toggleHeroWaitlist = (buttonRef: HTMLButtonElement | null) => {
+    setShowHeroWaitlist(!showHeroWaitlist);
     
     // Scroll to keep the button in view after the form expands/collapses
-    if (!showWaitlist && buttonRef) {
+    if (!showHeroWaitlist && buttonRef) {
+      setTimeout(() => {
+        buttonRef.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    }
+  };
+
+  const toggleCtaWaitlist = (buttonRef: HTMLButtonElement | null) => {
+    setShowCtaWaitlist(!showCtaWaitlist);
+    
+    // Scroll to keep the button in view after the form expands/collapses
+    if (!showCtaWaitlist && buttonRef) {
       setTimeout(() => {
         buttonRef.scrollIntoView({ 
           behavior: 'smooth', 
@@ -206,11 +221,11 @@ export default function MarketingHome() {
         {/* CTA BUTTON */}
         <div className="mt-8 flex justify-center">
           <button
-            onClick={(e) => toggleWaitlist(e.currentTarget)}
+            onClick={(e) => toggleHeroWaitlist(e.currentTarget)}
             className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
           >
             <span className="text-white">
-              {showWaitlist ? "Hide form" : "Join the early access list"}
+              {showHeroWaitlist ? "Hide form" : "Join the early access list"}
             </span>
           </button>
         </div>
@@ -218,7 +233,7 @@ export default function MarketingHome() {
         {/* EXPANDING FORM */}
         <div
           className={`transition-all duration-700 overflow-hidden ${
-            showWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
+            showHeroWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
           }`}
         >
           <form
@@ -383,17 +398,17 @@ export default function MarketingHome() {
 
                 {/* CTA BUTTON */}
                 <MagneticButton 
-                  onClick={(buttonElement) => toggleWaitlist(buttonElement)}
+                  onClick={(buttonElement) => toggleCtaWaitlist(buttonElement)}
                 >
                   <span className="text-white">
-                    {showWaitlist ? "Hide form" : "Join the early access list"}
+                    {showCtaWaitlist ? "Hide form" : "Join the early access list"}
                   </span>
                 </MagneticButton>
 
                 {/* EXPANDING CUSTOM FORM */}
                 <div
                   className={`transition-all duration-700 overflow-hidden ${
-                    showWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
+                    showCtaWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
                   }`}
                 >
                   <form

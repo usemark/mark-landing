@@ -186,29 +186,29 @@ export default function MarketingHome() {
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          Your all-in-one AI Marketing Assistant built for creators, founders,
-          and businesses who want clarity, consistency, and speed.
+          An AI marketing assistant that remembers your brand, understands your goals, and helps you create content with confidence.
         </p>
 
         {/* CTA BUTTON */}
         <div className="mt-8 flex justify-center">
-          <MagneticButton onClick={() => setShowWaitlist(!showWaitlist)}>
-            <span className="text-white">
-              Join the early access list
-            </span>
-          </MagneticButton>
+          <button
+            onClick={() => setShowWaitlist(!showWaitlist)}
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight rounded-full bg-gradient-to-br from-[#FF6A1A] to-[#FF3E00] text-white transition-all hover:shadow-[0_0_30px_rgba(255,106,26,0.6)] hover:scale-105"
+          >
+            <span>Join the early access list</span>
+          </button>
         </div>
 
         {/* EXPANDING FORM */}
         <div
           className={`transition-all duration-700 overflow-hidden ${
-            showWaitlist ? "max-h-[500px] mt-6" : "max-h-0"
+            showWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
           }`}
         >
           <form
             action="https://app.kit.com/forms/8813748/subscriptions"
             method="post"
-            className="bg-white/80 backdrop-blur-xl border border-white/40 rounded-2xl p-6 max-w-md mx-auto w-full space-y-4 shadow-xl"
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
           >
             {/* Redirect to thank-you page */}
             <input
@@ -222,7 +222,16 @@ export default function MarketingHome() {
               type="text"
               name="fields[first_name]"
               placeholder="First Name"
-              className="w-full px-4 py-3 rounded-lg bg-white border border-black/10 text-black placeholder-black/40 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+              required
+            />
+
+            {/* Last Name */}
+            <input
+              type="text"
+              name="fields[last_name]"
+              placeholder="Last Name"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
               required
             />
 
@@ -231,7 +240,7 @@ export default function MarketingHome() {
               type="email"
               name="email_address"
               placeholder="Email Address"
-              className="w-full px-4 py-3 rounded-lg bg-white border border-black/10 text-black placeholder-black/40 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
               required
             />
 
@@ -366,7 +375,7 @@ export default function MarketingHome() {
                 {/* EXPANDING CUSTOM FORM */}
                 <div
                   className={`transition-all duration-700 overflow-hidden ${
-                    showWaitlist ? "max-h-[500px] mt-6" : "max-h-0"
+                    showWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
                   }`}
                 >
                   <form
@@ -375,7 +384,7 @@ export default function MarketingHome() {
                     className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
                   >
 
-                    {/* 🔥 REDIRECT TO USEMARK.APP/THANK-YOU */}
+                    {/* Redirect to thank-you page */}
                     <input
                       type="hidden"
                       name="redirect_url"
@@ -387,6 +396,15 @@ export default function MarketingHome() {
                       type="text"
                       name="fields[first_name]"
                       placeholder="First Name"
+                      className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                      required
+                    />
+
+                    {/* Last Name */}
+                    <input
+                      type="text"
+                      name="fields[last_name]"
+                      placeholder="Last Name"
                       className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
                       required
                     />

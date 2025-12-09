@@ -306,21 +306,21 @@ export default function MarketingHome() {
       {/* FEATURES */}
       {/* ================================================== */}
       <section className="px-8 py-28 max-w-6xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
-        <div className="reveal">
+        <div className="reveal animate-fade-in-up">
           <FeatureCard
             title="AI-Powered Threads"
             desc="A conversation-based workflow that handles planning, creation, strategy, and analysis in one place."
           />
         </div>
 
-        <div className="reveal delay-1">
+        <div className="reveal animate-fade-in-up">
           <FeatureCard
             title="Brand-Aware Intelligence"
             desc="Mark learns your tone, goals, and audience, automatically generating content aligned with your identity."
           />
         </div>
 
-        <div className="reveal delay-2">
+        <div className="reveal animate-fade-in-up">
           <FeatureCard
             title="Unified Marketing OS"
             desc="A single workspace for content, insights, automations, and planning built for speed and simplicity."

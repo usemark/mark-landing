@@ -193,7 +193,7 @@ export default function MarketingHome() {
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          Mark is your creator operating system—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
+          Mark is your marketing operating system—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
         </p>
 
         {/* CTA BUTTON */}
@@ -272,7 +272,7 @@ export default function MarketingHome() {
         <div className="mt-20 flex justify-center">
           <div className="backdrop-blur-xl bg-white/30 border border-white/50 shadow-xl rounded-3xl px-12 py-10 max-w-xl animate-fade-in-up">
             <p className="text-lg text-[#0A0A0A] leading-relaxed font-medium">
-              Think of Mark as your creative command center—a single system that handles everything from brainstorming to brand consistency, designed specifically for creators who share content online.
+              Think of Mark as your marketing command center—a single system that handles everything from campaign strategy to brand consistency, built for marketers and creators who share content online.
             </p>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function MarketingHome() {
           See Mark in action
         </h2>
         <p className="text-lg text-black/70 text-center max-w-2xl mx-auto mb-20">
-          Your creator operating system in five powerful modules.
+          Your marketing operating system in five powerful modules.
         </p>
 
         {/* Screenshot Grid - Premium Layout - All Full Width */}
@@ -343,13 +343,13 @@ export default function MarketingHome() {
             <div className="mb-6 text-center">
               <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Idea Lab</h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Brainstorm and develop content ideas through a structured 3-phase workflow—from raw concepts to fully-formed strategies.
+                Brainstorm and develop campaign ideas through a structured 3-phase workflow—from initial concepts to execution-ready strategies.
               </p>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
               <Image
                 src="/screenshots/idea-lab.png"
-                alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
+                alt="Mark Idea Lab - 3-phase brainstorming workflow for marketers and content creators"
                 width={1400}
                 height={787}
                 className="w-full h-auto"
@@ -381,7 +381,7 @@ export default function MarketingHome() {
             <div className="mb-6 text-center">
               <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Daily News Insights</h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Get personalized news and trends curated for your niche every morning—stay ahead of the conversation without the noise.
+                Get personalized industry news and trends curated for your market every morning—stay ahead without the noise.
               </p>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
@@ -427,11 +427,11 @@ export default function MarketingHome() {
 
             <div className="relative">
               <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-                Your creator operating system awaits.
+                Your marketing operating system awaits.
               </h3>
 
               <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
-                Join the waitlist and be among the first to experience a workspace built specifically for creators—where strategy, content, and brand memory work together seamlessly.
+                Join the waitlist and be among the first to experience a workspace built for marketers and creators—where strategy, content, and brand memory work together seamlessly.
               </p>
 
               <div className="flex flex-col items-center">
@@ -520,11 +520,11 @@ export default function MarketingHome() {
         </h2>
 
         <p className="text-lg text-black/70 leading-relaxed font-medium">
-          Hey, I'm Brendan. I built Mark because creators deserve better tools. The content creation landscape is fragmented—AI tools that don't remember your brand, strategy tools disconnected from execution, and no single system built specifically for people who share content online.
+          Hey, I'm Brendan. I built Mark because marketers and content creators deserve better tools. The marketing landscape is fragmented—AI tools that don't remember your brand, strategy tools disconnected from execution, and no single system built specifically for people who create and share content online.
         </p>
 
         <p className="text-lg text-black/70 leading-relaxed mt-4 font-medium">
-          Mark is my answer to that: a creator operating system that brings everything together—brand memory, strategic thinking, content creation, and daily insights—in one intelligent workspace that learns from you and grows with you.
+          Mark is my answer to that: a marketing operating system that brings everything together—brand memory, strategic thinking, campaign planning, and daily insights—in one intelligent workspace that learns from you and grows with you.
         </p>
 
 

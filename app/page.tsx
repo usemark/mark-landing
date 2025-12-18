@@ -5,8 +5,6 @@ import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
-type DemoTab = "strategy" | "content" | "analytics";
-
 export default function MarketingHome() {
   /* ============================= */
   /* SCROLL REVEAL ANIMATION HOOK */
@@ -72,26 +70,6 @@ export default function MarketingHome() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setCursorPos({ x, y });
-  };
-
-  /* ============================= */
-  /* DEMO TABS STATE               */
-  /* ============================= */
-  const [demoTab, setDemoTab] = useState<DemoTab>("strategy");
-
-  const demoContent: Record<DemoTab, { user: string; mark: string }> = {
-    strategy: {
-      user: "Give me a 7-day content game plan to relaunch my brand on TikTok.",
-      mark: "Here's a 7-day relaunch sprint: Day 1: Origin story video, Day 2: Problem & promise, Day 3: Quick win tutorial, Day 4: Blind reaction / stitch, Day 5: Results or proof, Day 6: Behind-the-scenes process, Day 7: Recap + call to action. I'll script each one and keep them in a single thread so you never lose the plan.",
-    },
-    content: {
-      user: "Write a bold hook and caption for a TikTok about turning chaos into a marketing system.",
-      mark: "Hook: 'Your marketing isn't failing, it's just scattered.' Caption: 'Most creators don't need more ideas. They need a system that turns ideas into content on repeat. Here's how I'd turn your chaos into a weekly content engine 👇' Then add 3 to 5 punchy bullet points and a soft CTA to your offer or waitlist.",
-    },
-    analytics: {
-      user: "Look at my last 20 posts and tell me what’s actually working.",
-      mark: "Your posts with the strongest watch time are all: 1) concrete and specific, 2) story-driven, and 3) tied to a clear transformation. Formats that underperform are vague listicles and generic trends. I’d recommend we double down on story-first posts and build two repeatable series from those top performers.",
-    },
   };
 
   /* ============================= */
@@ -210,12 +188,12 @@ export default function MarketingHome() {
       {/* ================================================== */}
       <section className="px-8 py-40 max-w-5xl mx-auto text-center relative z-10">
         <h1 className="text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.9] text-[#0A0A0A]">
-          <span className="block animate-hero-left">Make your</span>
-          <span className="block text-[#FF6A1A] animate-hero-right">Mark.</span>
+          <span className="block animate-hero-left">Your partner for</span>
+          <span className="block text-[#FF6A1A] animate-hero-right">content that works.</span>
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          An AI marketing assistant that remembers your brand, understands your goals, and helps you create content with confidence.
+          Mark is your creator operating system—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
         </p>
 
         {/* CTA BUTTON */}
@@ -294,9 +272,7 @@ export default function MarketingHome() {
         <div className="mt-20 flex justify-center">
           <div className="backdrop-blur-xl bg-white/30 border border-white/50 shadow-xl rounded-3xl px-12 py-10 max-w-xl animate-fade-in-up">
             <p className="text-lg text-[#0A0A0A] leading-relaxed font-medium">
-              Mark is built to feel like a true teammate, one that understands
-              your brand, your voice, and your goals, and helps you create
-              faster, smarter, and with total clarity.
+              Think of Mark as your creative command center—a single system that handles everything from brainstorming to brand consistency, designed specifically for creators who share content online.
             </p>
           </div>
         </div>
@@ -308,76 +284,109 @@ export default function MarketingHome() {
       <section className="px-8 py-28 max-w-6xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
         <div className="reveal animate-fade-in-up">
           <FeatureCard
-            title="AI-Powered Threads"
-            desc="A conversation-based workflow that handles planning, creation, strategy, and analysis in one place."
+            title="Brand Memory System"
+            desc="Mark remembers your brand voice, style guidelines, and audience insights—so every piece of content stays on-brand without you repeating yourself."
           />
         </div>
 
         <div className="reveal animate-fade-in-up">
           <FeatureCard
-            title="Brand-Aware Intelligence"
-            desc="Mark learns your tone, goals, and audience, automatically generating content aligned with your identity."
+            title="Idea Lab"
+            desc="Brainstorm and develop content ideas through a structured 3-phase workflow—from raw concepts to fully-formed strategies ready to execute."
           />
         </div>
 
         <div className="reveal animate-fade-in-up">
           <FeatureCard
-            title="Unified Marketing OS"
-            desc="A single workspace for content, insights, automations, and planning built for speed and simplicity."
+            title="Daily News Insights"
+            desc="Get personalized news and trends curated for your niche every morning, so you're always ahead of the conversation and never miss what matters."
           />
         </div>
       </section>
 
       {/* ================================================== */}
-      {/* DEMO PREVIEW */}
+      {/* DEMO PREVIEW - SCREENSHOTS */}
       {/* ================================================== */}
-      <section className="px-8 py-24 max-w-4xl mx-auto relative z-10 reveal">
+      <section className="px-8 py-24 max-w-6xl mx-auto relative z-10 reveal">
         <h2 className="text-4xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-4">
           See Mark in action
         </h2>
-        <p className="text-base text-black/70 text-center max-w-2xl mx-auto">
-          A single thread where strategy, content, and analytics all live in one
-          place.
+        <p className="text-base text-black/70 text-center max-w-2xl mx-auto mb-12">
+          Your creator operating system in four core modules.
         </p>
 
-        {/* Demo Container */}
-        <div className="mt-10 bg-white/80 backdrop-blur-md border border-black/5 rounded-3xl shadow-lg p-6 md:p-8">
-
-          {/* Tabs */}
-          <div className="flex flex-wrap gap-2 text-xs font-medium text-black/70 mb-6">
-            {(["strategy", "content", "analytics"] as DemoTab[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setDemoTab(tab)}
-                className={`px-3 py-1 rounded-full border transition ${
-                  demoTab === tab
-                    ? "bg-[#FF6A1A] text-white border-transparent"
-                    : "bg-white text-black/60 border-black/10 hover:bg-black/5"
-                }`}
-              >
-                {tab === "strategy" && "Strategy"}
-                {tab === "content" && "Content"}
-                {tab === "analytics" && "Analytics"}
-              </button>
-            ))}
-          </div>
-
-          {/* Conversation */}
-          <div className="space-y-4 text-sm leading-relaxed">
-            {/* User bubble */}
-            <div className="flex justify-end">
-              <div className="rounded-2xl bg-[#111111] text-white px-4 py-3 max-w-[80%] shadow-md">
-                {demoContent[demoTab].user}
-              </div>
-            </div>
-
-            {/* Mark bubble */}
-            <div className="flex justify-start">
-              <div className="rounded-2xl bg-[#FFF3E8] border border-[#FFD0A3] text-[#3A1A00] px-4 py-3 max-w-[85%] shadow-sm">
-                {demoContent[demoTab].mark}
-              </div>
+        {/* Screenshot Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          
+          {/* Brand Profile Screenshot */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Brand Memory</h3>
+            <p className="text-sm text-black/60 mb-4">
+              Teach Mark your voice, style, and goals—it remembers everything so your content stays consistent.
+            </p>
+            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+              <Image
+                src="/screenshots/brand-profile.png"
+                alt="Mark Brand Profile - Build your personalized AI marketing assistant"
+                width={1440}
+                height={810}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
           </div>
+
+          {/* Idea Lab Screenshot */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Idea Lab</h3>
+            <p className="text-sm text-black/60 mb-4">
+              Brainstorm and develop content ideas through a structured 3-phase workflow.
+            </p>
+            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+              <Image
+                src="/screenshots/idea-lab.png"
+                alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
+                width={1440}
+                height={810}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Daily News Insights Screenshot */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Daily News Insights</h3>
+            <p className="text-sm text-black/60 mb-4">
+              Get personalized news and trends curated for your niche every morning.
+            </p>
+            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+              <Image
+                src="/screenshots/daily-news.png"
+                alt="Mark Daily News - Personalized news insights for content creators"
+                width={1440}
+                height={810}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Conversational Threads Screenshot */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Conversational Threads</h3>
+            <p className="text-sm text-black/60 mb-4">
+              Work through strategy, copywriting, and revisions in natural conversations.
+            </p>
+            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+              <Image
+                src="/screenshots/threads-interface.png"
+                alt="Mark Conversational Threads - Natural AI conversations for content strategy"
+                width={1440}
+                height={810}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -391,12 +400,11 @@ export default function MarketingHome() {
 
             <div className="relative">
               <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-                A new way to run your marketing.
+                Your creator operating system awaits.
               </h3>
 
               <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
-                Be one of the first to plug your brand into Mark and turn chaos into a clear,
-                repeatable marketing system.
+                Join the waitlist and be among the first to experience a workspace built specifically for creators—where strategy, content, and brand memory work together seamlessly.
               </p>
 
               <div className="flex flex-col items-center">
@@ -485,15 +493,11 @@ export default function MarketingHome() {
         </h2>
 
         <p className="text-lg text-black/70 leading-relaxed font-medium">
-          Hey, I'm Brendan. I'm building Mark because marketing shouldn't feel
-          overwhelming or scattered across dozens of tools. I wanted a system
-          that helps creators and businesses move faster, stay consistent, and
-          grow without chaos.
+          Hey, I'm Brendan. I built Mark because creators deserve better tools. The content creation landscape is fragmented—AI tools that don't remember your brand, strategy tools disconnected from execution, and no single system built specifically for people who share content online.
         </p>
 
         <p className="text-lg text-black/70 leading-relaxed mt-4 font-medium">
-          Mark is designed to feel human, a teammate who understands your brand,
-          your goals, and how to help you move forward every day.
+          Mark is my answer to that: a creator operating system that brings everything together—brand memory, strategic thinking, content creation, and daily insights—in one intelligent workspace that learns from you and grows with you.
         </p>
 
 

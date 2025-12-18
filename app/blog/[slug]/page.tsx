@@ -25,11 +25,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const post = await getPostData(slug);
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+    // Parse date as local time to avoid timezone issues
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
-      day: 'numeric' 
+      day: 'numeric',
+      timeZone: 'America/New_York'
     });
   };
 
@@ -79,9 +82,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Title */}
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-          {post.title}
-        </h1>
+        <h1 
+          className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6"
+          dangerouslySetInnerHTML={{ __html: post.title }}
+        />
 
         {/* Meta Info */}
         <div className="flex flex-wrap items-center gap-4 text-black/60 mb-12 pb-8 border-b border-black/10">
@@ -109,14 +113,16 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <div 
           className="prose prose-lg max-w-none
             prose-headings:font-bold prose-headings:text-[#0A0A0A] 
-            prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
-            prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
+            prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-8
+            prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
             prose-p:text-black/80 prose-p:leading-relaxed prose-p:mb-6
             prose-a:text-[#FF6A1A] prose-a:no-underline hover:prose-a:underline
             prose-strong:text-[#0A0A0A] prose-strong:font-semibold
-            prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
-            prose-li:text-black/80 prose-li:mb-2
-            prose-blockquote:border-l-4 prose-blockquote:border-[#FF6A1A] prose-blockquote:pl-4 prose-blockquote:italic"
+            prose-ul:my-8 prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-3
+            prose-li:text-black/80
+            prose-blockquote:border-l-4 prose-blockquote:border-[#FF6A1A] prose-blockquote:pl-6 prose-blockquote:py-2 prose-blockquote:my-8 prose-blockquote:italic prose-blockquote:text-xl
+            prose-hr:my-16 prose-hr:border-black/10
+            prose-img:rounded-xl prose-img:shadow-lg prose-img:my-12"
           dangerouslySetInnerHTML={{ __html: post.content || '' }}
         />
       </article>
@@ -124,11 +130,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       {/* CTA Section */}
       <section className="px-8 py-20 border-t">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-[#0A0A0A] mb-4">
-            Ready to transform your marketing?
+          <h2 className="text-3xl font-extrabold text-[#0A0A0A] mb-4">
+            Ready to <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">transform</span> your marketing?
           </h2>
           <p className="text-lg text-black/70 mb-8">
-            Join the waitlist for Mark—the marketing operating system built for creators and marketers.
+            Join the waitlist for Mark—the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">marketing operating system</span> built for creators and marketers.
           </p>
           <Link 
             href="/"

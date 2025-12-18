@@ -7,6 +7,27 @@ import { useEffect, useState } from "react";
 
 export default function MarketingHome() {
   /* ============================= */
+  /* BLOG POSTS STATE              */
+  /* ============================= */
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadPosts() {
+      try {
+        const response = await fetch('/api/blog');
+        const allPosts = await response.json();
+        setPosts(allPosts.slice(0, 2)); // Get first 2 posts
+      } catch (error) {
+        console.error("Error loading posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPosts();
+  }, []);
+
+  /* ============================= */
   /* SCROLL REVEAL ANIMATION HOOK */
   /* ============================= */
   useEffect(() => {
@@ -182,8 +203,17 @@ export default function MarketingHome() {
           priority
         />
 
-        {/* Follow Us Dropdown */}
-        <div className="group relative">
+        <div className="flex items-center gap-4">
+          {/* Blog Link */}
+          <Link
+            href="/blog"
+            className="px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-medium text-black/80 hover:text-[#FF6A1A]"
+          >
+            Blog
+          </Link>
+
+          {/* Follow Us Dropdown */}
+          <div className="group relative">
           <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-md hover:shadow-lg hover:scale-105 transition-all">
             <svg className="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
@@ -286,6 +316,7 @@ export default function MarketingHome() {
             </div>
           </div>
         </div>
+        </div>
       </nav>
 
       {/* ================================================== */}
@@ -298,7 +329,7 @@ export default function MarketingHome() {
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          Mark is your marketing operating system—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
+          Mark is your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">marketing operating system</span>—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
         </p>
 
         {/* CTA BUTTON */}
@@ -377,7 +408,7 @@ export default function MarketingHome() {
         <div className="mt-20 flex justify-center">
           <div className="backdrop-blur-xl bg-white/30 border border-white/50 shadow-xl rounded-3xl px-12 py-10 max-w-xl animate-fade-in-up">
             <p className="text-lg text-[#0A0A0A] leading-relaxed font-medium">
-              Think of Mark as your marketing command center—a single system that handles everything from campaign strategy to brand consistency, built for marketers and creators who share content online.
+              Think of Mark as your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">marketing command center</span>—a single system that handles everything from campaign strategy to brand consistency, built for marketers and creators who share content online.
             </p>
           </div>
         </div>
@@ -389,10 +420,10 @@ export default function MarketingHome() {
       <section className="px-8 py-32 max-w-6xl mx-auto relative z-10 reveal">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-            Roadmap to Beta
+            Roadmap to <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Beta</span>
           </h2>
           <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Building Mark in public. Follow our journey from conception to launch.
+            Building Mark <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-semibold">in public</span>. Follow our journey from conception to launch.
           </p>
         </div>
 
@@ -478,7 +509,9 @@ export default function MarketingHome() {
         {/* Pricing Info */}
         <div className="mt-24 text-center">
           <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-8 max-w-2xl">
-            <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-4">Subscription-Based Premium Service</h3>
+            <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-4">
+              Subscription-Based <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Premium Service</span>
+            </h3>
             <p className="text-base text-black/70 mb-4">
               Mark Pro will be a single-tier subscription designed for serious marketers and creators who want the best tools for their craft.
             </p>
@@ -497,10 +530,10 @@ export default function MarketingHome() {
       {/* ================================================== */}
       <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">
         <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-6">
-          See Mark in action
+          See Mark <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">in Action</span>
         </h2>
         <p className="text-lg text-black/70 text-center max-w-2xl mx-auto mb-20">
-          Your marketing operating system in five powerful modules.
+          Your marketing operating system in five <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">powerful modules</span>.
         </p>
 
         {/* Screenshot Grid - Premium Layout - All Full Width */}
@@ -509,7 +542,9 @@ export default function MarketingHome() {
           {/* Brand Profile Screenshot - Full Width */}
           <div className="group">
             <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Brand Memory System</h3>
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
+                Brand <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Memory System</span>
+              </h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
                 Teach Mark your voice, style, and goals—it remembers everything so your content stays consistent across every channel.
               </p>
@@ -529,7 +564,9 @@ export default function MarketingHome() {
           {/* Idea Lab Screenshot - Full Width */}
           <div className="group">
             <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Idea Lab</h3>
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
+                Idea <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Lab</span>
+              </h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
                 Brainstorm and develop campaign ideas through a structured 3-phase workflow—from initial concepts to execution-ready strategies.
               </p>
@@ -548,7 +585,9 @@ export default function MarketingHome() {
           {/* Projects Screenshot - Full Width */}
           <div className="group">
             <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Projects</h3>
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
+                <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Projects</span>
+              </h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
                 Organize campaigns and initiatives in dedicated project spaces with summaries, artifacts, briefs, and task tracking.
               </p>
@@ -567,7 +606,9 @@ export default function MarketingHome() {
           {/* Daily News Screenshot - Full Width */}
           <div className="group">
             <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Daily News Insights</h3>
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
+                Daily News <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Insights</span>
+              </h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
                 Get personalized industry news and trends curated for your market every morning—stay ahead without the noise.
               </p>
@@ -586,7 +627,9 @@ export default function MarketingHome() {
           {/* Conversational Threads Screenshot - Full Width */}
           <div className="group">
             <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Conversational Threads</h3>
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
+                Conversational <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Threads</span>
+              </h3>
               <p className="text-base text-black/60 max-w-2xl mx-auto">
                 Work through strategy, copywriting, and revisions in natural conversations—no complex interfaces, just intelligent dialogue.
               </p>
@@ -615,7 +658,7 @@ export default function MarketingHome() {
 
             <div className="relative">
               <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-                Your marketing operating system awaits.
+                Your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">marketing operating system</span> awaits.
               </h3>
 
               <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
@@ -705,71 +748,81 @@ export default function MarketingHome() {
       <section className="px-8 py-32 max-w-6xl mx-auto relative z-10 reveal">
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-            From the Blog
+            From the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Blog</span>
           </h2>
           <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Follow along as we build Mark in public. First post coming soon!
+            Follow along as we <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">build in public</span>. Latest updates from the Mark team.
           </p>
         </div>
 
-        {/* Blog Posts Grid - Coming Soon */}
-        <div className="grid md:grid-cols-3 gap-8">
-          
-          {/* Coming Soon Post 1 */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
-            <div className="aspect-video bg-gradient-to-br from-[#FF6A1A]/20 to-[#FFB84D]/20 flex items-center justify-center">
-              <span className="text-4xl">🚀</span>
-            </div>
-            <div className="p-6">
-              <span className="inline-block px-3 py-1 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-full text-xs font-bold mb-3">
-                Coming Soon
-              </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
-                First post in progress
-              </h3>
-              <p className="text-sm text-black/60">
-                Stay tuned for insights on building Mark and what we're learning along the way.
-              </p>
-            </div>
+        {/* Blog Posts Grid */}
+        {loading ? (
+          <div className="text-center py-20">
+            <div className="inline-block w-8 h-8 border-4 border-[#FF6A1A]/30 border-t-[#FF6A1A] rounded-full animate-spin" />
+            <p className="mt-4 text-black/50">Loading posts...</p>
           </div>
-
-          {/* Coming Soon Post 2 */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
-            <div className="aspect-video bg-gradient-to-br from-[#FF8A1A]/20 to-[#FFA84D]/20 flex items-center justify-center">
-              <span className="text-4xl">🛠️</span>
-            </div>
-            <div className="p-6">
-              <span className="inline-block px-3 py-1 bg-[#FF8A1A]/10 text-[#FF8A1A] rounded-full text-xs font-bold mb-3">
-                Coming Soon
-              </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
-                Behind the scenes
-              </h3>
-              <p className="text-sm text-black/60">
-                A look at how we're building Mark's core features and what makes it different.
-              </p>
-            </div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-black/50">No blog posts yet. Check back soon!</p>
           </div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+            {posts.map((post) => (
+              <Link 
+                key={post.slug} 
+                href={`/blog/${post.slug}`}
+                className="group w-full md:w-[calc(50%-1rem)] max-w-md"
+              >
+                <article className="h-full bg-white/80 backdrop-blur-md border border-black/10 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                  {/* Category Badge */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-2xl">📝</span>
+                    <span className="text-xs font-semibold text-[#FF6A1A] uppercase tracking-wider">
+                      {post.category || 'Blog'}
+                    </span>
+                  </div>
 
-          {/* Coming Soon Post 3 */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
-            <div className="aspect-video bg-gradient-to-br from-[#FFA84D]/20 to-[#FFB84D]/20 flex items-center justify-center">
-              <span className="text-4xl">💡</span>
-            </div>
-            <div className="p-6">
-              <span className="inline-block px-3 py-1 bg-[#FFA84D]/10 text-[#FFA84D] rounded-full text-xs font-bold mb-3">
-                Coming Soon
-              </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
-                Marketing insights
-              </h3>
-              <p className="text-sm text-black/60">
-                Tips, strategies, and lessons for marketers and creators building online.
-              </p>
-            </div>
+                  {/* Title */}
+                  <h3 
+                    className="text-2xl font-bold text-[#0A0A0A] mb-3 transition line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: post.title }}
+                  />
+
+                  {/* Excerpt */}
+                  <p className="text-black/70 mb-4 line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Meta Info */}
+                  <div className="flex items-center justify-between text-sm text-black/50 pt-4 border-t border-black/5">
+                    <span>{new Date(post.date).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric',
+                      timeZone: 'America/New_York'
+                    })}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
+        )}
 
-        </div>
+        {/* View All Blog Posts Button */}
+        {posts.length > 0 && (
+          <div className="text-center mt-12">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-md border border-black/10 rounded-xl font-semibold text-[#0A0A0A] hover:border-[#FF6A1A] hover:text-[#FF6A1A] transition-all"
+            >
+              View All Posts
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* ================================================== */}
@@ -777,7 +830,7 @@ export default function MarketingHome() {
       {/* ================================================== */}
       <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal text-center">
         <h2 className="text-5xl font-extrabold tracking-tight text-[#0A0A0A] mb-8">
-          A message from the founder
+          A <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">message</span> from the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">founder</span>
         </h2>
 
         <p className="text-lg text-black/70 leading-relaxed font-medium">

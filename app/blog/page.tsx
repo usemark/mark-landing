@@ -33,11 +33,14 @@ export default function BlogPage() {
   }, []);
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+    // Parse date as local time to avoid timezone issues
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
-      day: 'numeric' 
+      day: 'numeric',
+      timeZone: 'America/New_York'
     });
   };
 
@@ -79,10 +82,10 @@ export default function BlogPage() {
       {/* Hero Section */}
       <section className="px-8 py-20 max-w-4xl mx-auto text-center">
         <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-          Blog
+          <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Blog</span>
         </h1>
         <p className="text-xl text-black/70 max-w-2xl mx-auto">
-          Insights on marketing, product development, and building in public from the Mark team.
+          Insights on marketing, product development, and <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">building in public</span> from the Mark team.
         </p>
       </section>
 
@@ -98,12 +101,12 @@ export default function BlogPage() {
             <p className="text-black/50">No blog posts yet. Check back soon!</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
             {posts.map((post) => (
               <Link 
                 key={post.slug} 
                 href={`/blog/${post.slug}`}
-                className="group"
+                className="group w-full md:w-[calc(50%-1rem)] max-w-md"
               >
                 <article className="h-full bg-white/80 backdrop-blur-md border border-black/10 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
                   {/* Category Badge */}
@@ -115,9 +118,10 @@ export default function BlogPage() {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-2xl font-bold text-[#0A0A0A] mb-3 group-hover:text-[#FF6A1A] transition line-clamp-2">
-                    {post.title}
-                  </h2>
+                  <h2 
+                    className="text-2xl font-bold text-[#0A0A0A] mb-3 transition line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: post.title }}
+                  />
 
                   {/* Excerpt */}
                   <p className="text-black/70 mb-4 line-clamp-3 leading-relaxed">

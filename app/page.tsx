@@ -795,12 +795,15 @@ export default function MarketingHome() {
 
                   {/* Meta Info */}
                   <div className="flex items-center justify-between text-sm text-black/50 pt-4 border-t border-black/5">
-                    <span>{new Date(post.date).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric',
-                      timeZone: 'America/New_York'
-                    })}</span>
+                    <span>{(() => {
+                      const [year, month, day] = post.date.split('-').map(Number);
+                      const date = new Date(year, month - 1, day, 12, 0, 0);
+                      return date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric'
+                      });
+                    })()}</span>
                     <span>{post.readTime}</span>
                   </div>
                 </article>

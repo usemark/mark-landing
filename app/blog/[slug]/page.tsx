@@ -25,14 +25,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const post = await getPostData(slug);
 
   const formatDate = (dateString: string) => {
-    // Parse date as local time to avoid timezone issues
+    // Parse date components and format directly to avoid timezone conversion
     const [year, month, day] = dateString.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
+    const date = new Date(year, month - 1, day, 12, 0, 0); // Set to noon to avoid timezone edge cases
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
-      day: 'numeric',
-      timeZone: 'America/New_York'
+      day: 'numeric'
     });
   };
 

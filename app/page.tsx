@@ -343,40 +343,11 @@ export default function MarketingHome() {
             </div>
           </div>
 
-          {/* Milestone 3: Private Beta */}
-          <div className="relative mb-24">
+          {/* Milestone 3: Beta Launch */}
+          <div className="relative">
             <div className="flex items-center justify-between">
               {/* Left Content */}
               <div className="w-5/12 text-right pr-12">
-                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
-                  <span className="inline-block px-3 py-1 bg-[#FFA84D]/10 text-[#FFA84D] rounded-full text-xs font-bold mb-3">
-                    UPCOMING
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Private Beta</h3>
-                  <p className="text-sm text-black/60 mb-2">Waitlist members get early access</p>
-                  <p className="text-lg font-bold text-[#FFA84D]">Early January 2026</p>
-                </div>
-              </div>
-
-              {/* Center Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FFA84D] rounded-full border-4 border-white shadow-lg z-10" />
-
-              {/* Right Space */}
-              <div className="w-5/12" />
-            </div>
-          </div>
-
-          {/* Milestone 4: Beta Launch */}
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              {/* Left Space */}
-              <div className="w-5/12" />
-
-              {/* Center Dot - HERO */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-[#FF6A1A] to-[#FFB84D] rounded-full border-4 border-white shadow-[0_0_30px_rgba(255,106,26,0.5)] z-10 animate-pulse" />
-
-              {/* Right Content */}
-              <div className="w-5/12 text-left pl-12">
                 <div className="inline-block bg-gradient-to-br from-[#FF6A1A]/10 to-[#FFB84D]/10 backdrop-blur-md border-2 border-[#FF6A1A]/30 rounded-2xl shadow-[0_20px_60px_rgba(255,106,26,0.3)] p-8 hover:shadow-[0_30px_80px_rgba(255,106,26,0.4)] transition-all">
                   <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-[#FF6A1A] to-[#FFB84D] text-white rounded-full text-sm font-bold mb-4">
                     🚀 BETA LAUNCH
@@ -388,6 +359,12 @@ export default function MarketingHome() {
                   </p>
                 </div>
               </div>
+
+              {/* Center Dot - HERO */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-[#FF6A1A] to-[#FFB84D] rounded-full border-4 border-white shadow-[0_0_30px_rgba(255,106,26,0.5)] z-10 animate-pulse" />
+
+              {/* Right Space */}
+              <div className="w-5/12" />
             </div>
           </div>
 

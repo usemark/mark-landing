@@ -19,8 +19,14 @@ export interface BlogPost {
 
 // Get all blog post slugs
 export function getAllPostSlugs() {
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  
   const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames.map((fileName) => {
+  const mdFiles = fileNames.filter(fileName => fileName.endsWith('.md'));
+  
+  return mdFiles.map((fileName) => {
     return {
       params: {
         slug: fileName.replace(/\.md$/, ''),
@@ -31,8 +37,18 @@ export function getAllPostSlugs() {
 
 // Get sorted blog posts data
 export function getSortedPostsData(): BlogPost[] {
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  const mdFiles = fileNames.filter(fileName => fileName.endsWith('.md'));
+  
+  if (mdFiles.length === 0) {
+    return [];
+  }
+  
+  const allPostsData = mdFiles.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');

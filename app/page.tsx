@@ -194,8 +194,8 @@ export default function MarketingHome() {
             </svg>
           </button>
 
-          {/* Dropdown Menu */}
-          <div className="absolute right-0 top-full mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+          {/* Dropdown Menu with hover bridge */}
+          <div className="absolute right-0 top-full pt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
             <div className="bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-2xl overflow-hidden">
               <div className="p-2 space-y-1">
                 <a
@@ -775,7 +775,7 @@ export default function MarketingHome() {
       {/* ================================================== */}
       {/* FOUNDER MESSAGE */}
       {/* ================================================== */}
-      <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal">
+      <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal text-center">
         <h2 className="text-5xl font-extrabold tracking-tight text-[#0A0A0A] mb-8">
           A message from the founder
         </h2>

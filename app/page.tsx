@@ -188,8 +188,8 @@ export default function MarketingHome() {
       {/* ================================================== */}
       <section className="px-8 py-40 max-w-5xl mx-auto text-center relative z-10">
         <h1 className="text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.9] text-[#0A0A0A]">
-          <span className="block animate-hero-left">Your partner for</span>
-          <span className="block text-[#FF6A1A] animate-hero-right">content that works.</span>
+          <span className="block animate-hero-left">Make your</span>
+          <span className="block text-[#FF6A1A] animate-hero-right">Mark.</span>
         </h1>
 
         <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
@@ -307,82 +307,95 @@ export default function MarketingHome() {
       {/* ================================================== */}
       {/* DEMO PREVIEW - SCREENSHOTS */}
       {/* ================================================== */}
-      <section className="px-8 py-24 max-w-6xl mx-auto relative z-10 reveal">
-        <h2 className="text-4xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-4">
+      <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">
+        <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-6">
           See Mark in action
         </h2>
-        <p className="text-base text-black/70 text-center max-w-2xl mx-auto mb-12">
+        <p className="text-lg text-black/70 text-center max-w-2xl mx-auto mb-20">
           Your creator operating system in four core modules.
         </p>
 
-        {/* Screenshot Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Screenshot Grid - Premium Layout */}
+        <div className="space-y-24">
           
-          {/* Brand Profile Screenshot */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Brand Memory</h3>
-            <p className="text-sm text-black/60 mb-4">
-              Teach Mark your voice, style, and goals—it remembers everything so your content stays consistent.
-            </p>
-            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+          {/* Brand Profile Screenshot - Full Width Hero */}
+          <div className="group">
+            <div className="mb-6 text-center">
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Brand Memory System</h3>
+              <p className="text-base text-black/60 max-w-2xl mx-auto">
+                Teach Mark your voice, style, and goals—it remembers everything so your content stays consistent across every channel.
+              </p>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
               <Image
                 src="/screenshots/brand-profile.png"
                 alt="Mark Brand Profile - Build your personalized AI marketing assistant"
-                width={1440}
-                height={810}
-                className="w-full h-full object-cover"
+                width={1400}
+                height={787}
+                className="w-full h-auto"
                 priority
               />
             </div>
           </div>
 
-          {/* Idea Lab Screenshot */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Idea Lab</h3>
-            <p className="text-sm text-black/60 mb-4">
-              Brainstorm and develop content ideas through a structured 3-phase workflow.
-            </p>
-            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
-              <Image
-                src="/screenshots/idea-lab.png"
-                alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
-                width={1440}
-                height={810}
-                className="w-full h-full object-cover"
-              />
+          {/* Two Column Layout - Idea Lab + Daily News */}
+          <div className="grid md:grid-cols-2 gap-12">
+            
+            {/* Idea Lab Screenshot */}
+            <div className="group">
+              <div className="mb-6">
+                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Idea Lab</h3>
+                <p className="text-sm text-black/60">
+                  Brainstorm and develop content ideas through a structured 3-phase workflow—from raw concepts to fully-formed strategies.
+                </p>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
+                <Image
+                  src="/screenshots/idea-lab.png"
+                  alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
+                  width={680}
+                  height={510}
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
+
+            {/* Daily News Insights Screenshot */}
+            <div className="group">
+              <div className="mb-6">
+                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Daily News Insights</h3>
+                <p className="text-sm text-black/60">
+                  Get personalized news and trends curated for your niche every morning—stay ahead of the conversation without the noise.
+                </p>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
+                <Image
+                  src="/screenshots/daily-news.png"
+                  alt="Mark Daily News - Personalized news insights for content creators"
+                  width={680}
+                  height={510}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
           </div>
 
-          {/* Daily News Insights Screenshot */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Daily News Insights</h3>
-            <p className="text-sm text-black/60 mb-4">
-              Get personalized news and trends curated for your niche every morning.
-            </p>
-            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
-              <Image
-                src="/screenshots/daily-news.png"
-                alt="Mark Daily News - Personalized news insights for content creators"
-                width={1440}
-                height={810}
-                className="w-full h-full object-cover"
-              />
+          {/* Conversational Threads Screenshot - Full Width */}
+          <div className="group">
+            <div className="mb-6 text-center">
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Conversational Threads</h3>
+              <p className="text-base text-black/60 max-w-2xl mx-auto">
+                Work through strategy, copywriting, and revisions in natural conversations—no complex interfaces, just intelligent dialogue.
+              </p>
             </div>
-          </div>
-
-          {/* Conversational Threads Screenshot */}
-          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-[#0A0A0A] mb-3">Conversational Threads</h3>
-            <p className="text-sm text-black/60 mb-4">
-              Work through strategy, copywriting, and revisions in natural conversations.
-            </p>
-            <div className="aspect-video rounded-xl overflow-hidden border border-black/10 shadow-md">
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
               <Image
                 src="/screenshots/threads-interface.png"
                 alt="Mark Conversational Threads - Natural AI conversations for content strategy"
-                width={1440}
-                height={810}
-                className="w-full h-full object-cover"
+                width={1400}
+                height={787}
+                className="w-full h-auto"
               />
             </div>
           </div>

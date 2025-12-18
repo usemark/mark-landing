@@ -338,8 +338,8 @@ export default function MarketingHome() {
             </div>
           </div>
 
-          {/* Two Column Layout - Idea Lab + Daily News */}
-          <div className="grid md:grid-cols-2 gap-12">
+          {/* Three Column Layout - Idea Lab + Projects + Daily News */}
+          <div className="grid md:grid-cols-3 gap-10">
             
             {/* Idea Lab Screenshot */}
             <div className="group">
@@ -353,7 +353,26 @@ export default function MarketingHome() {
                 <Image
                   src="/screenshots/idea-lab.png"
                   alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
-                  width={680}
+                  width={450}
+                  height={510}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
+            {/* Projects Screenshot */}
+            <div className="group">
+              <div className="mb-6">
+                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Projects</h3>
+                <p className="text-sm text-black/60">
+                  Organize campaigns and initiatives in dedicated project spaces with summaries, artifacts, briefs, and task tracking.
+                </p>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
+                <Image
+                  src="/screenshots/projects-view.png"
+                  alt="Mark Projects - Organize campaigns and track progress in dedicated workspaces"
+                  width={450}
                   height={510}
                   className="w-full h-auto"
                 />
@@ -372,7 +391,7 @@ export default function MarketingHome() {
                 <Image
                   src="/screenshots/daily-news.png"
                   alt="Mark Daily News - Personalized news insights for content creators"
-                  width={680}
+                  width={450}
                   height={510}
                   className="w-full h-auto"
                 />

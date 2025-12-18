@@ -11,16 +11,18 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each post
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPostData(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostData(slug);
   return {
     title: `${post.title} | Mark Blog`,
     description: post.excerpt,
   };
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const post = await getPostData(params.slug);
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostData(slug);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

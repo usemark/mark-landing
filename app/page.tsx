@@ -708,80 +708,67 @@ export default function MarketingHome() {
             From the Blog
           </h2>
           <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Follow along as we build Mark in public. Updates, insights, and lessons from the journey.
+            Follow along as we build Mark in public. First post coming soon!
           </p>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        {/* Blog Posts Grid - Coming Soon */}
+        <div className="grid md:grid-cols-3 gap-8">
           
-          {/* Blog Post 1: Why Mark Exists */}
-          <Link href="/blog/why-mark-exists" className="group bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
+          {/* Coming Soon Post 1 */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
             <div className="aspect-video bg-gradient-to-br from-[#FF6A1A]/20 to-[#FFB84D]/20 flex items-center justify-center">
-              <span className="text-4xl">�</span>
+              <span className="text-4xl">🚀</span>
             </div>
             <div className="p-6">
               <span className="inline-block px-3 py-1 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-full text-xs font-bold mb-3">
-                Product
+                Coming Soon
               </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2 group-hover:text-[#FF6A1A] transition">
-                Why Mark Exists
+              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
+                First post in progress
               </h3>
               <p className="text-sm text-black/60">
-                The story behind building a marketing operating system that finally brings everything together.
+                Stay tuned for insights on building Mark and what we're learning along the way.
               </p>
             </div>
-          </Link>
+          </div>
 
-          {/* Blog Post 2: Building in Public */}
-          <Link href="/blog/building-in-public" className="group bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
+          {/* Coming Soon Post 2 */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
             <div className="aspect-video bg-gradient-to-br from-[#FF8A1A]/20 to-[#FFA84D]/20 flex items-center justify-center">
-              <span className="text-4xl">�️</span>
+              <span className="text-4xl">🛠️</span>
             </div>
             <div className="p-6">
               <span className="inline-block px-3 py-1 bg-[#FF8A1A]/10 text-[#FF8A1A] rounded-full text-xs font-bold mb-3">
-                Behind the Scenes
+                Coming Soon
               </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2 group-hover:text-[#FF8A1A] transition">
-                Building in Public
+              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
+                Behind the scenes
               </h3>
               <p className="text-sm text-black/60">
-                A transparent look at our journey to beta launch—the wins, challenges, and lessons learned.
+                A look at how we're building Mark's core features and what makes it different.
               </p>
             </div>
-          </Link>
+          </div>
 
-          {/* Blog Post 3: Future of Marketing */}
-          <Link href="/blog/future-of-marketing" className="group bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden">
+          {/* Coming Soon Post 3 */}
+          <div className="bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg transition-all overflow-hidden opacity-60">
             <div className="aspect-video bg-gradient-to-br from-[#FFA84D]/20 to-[#FFB84D]/20 flex items-center justify-center">
               <span className="text-4xl">💡</span>
             </div>
             <div className="p-6">
               <span className="inline-block px-3 py-1 bg-[#FFA84D]/10 text-[#FFA84D] rounded-full text-xs font-bold mb-3">
-                Industry Insights
+                Coming Soon
               </span>
-              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2 group-hover:text-[#FFA84D] transition">
-                The Future of Marketing
+              <h3 className="text-xl font-extrabold text-[#0A0A0A] mb-2">
+                Marketing insights
               </h3>
               <p className="text-sm text-black/60">
-                Why every creator needs an operating system approach to content and marketing strategy.
+                Tips, strategies, and lessons for marketers and creators building online.
               </p>
             </div>
-          </Link>
+          </div>
 
-        </div>
-
-        {/* View All Posts Button */}
-        <div className="text-center">
-          <Link 
-            href="/blog"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold tracking-tight bg-white/80 backdrop-blur-md border border-black/10 rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all text-black/80 hover:text-[#FF6A1A]"
-          >
-            View All Posts
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
         </div>
       </section>
 

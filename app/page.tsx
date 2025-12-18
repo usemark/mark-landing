@@ -338,22 +338,24 @@ export default function MarketingHome() {
             </div>
           </div>
 
-          {/* Three Column Layout - Idea Lab + Projects + Daily News */}
-          <div className="grid md:grid-cols-3 gap-10">
+          {/* Two-Row Layout - Larger Screenshots */}
+          
+          {/* Row 1: Idea Lab + Projects */}
+          <div className="grid md:grid-cols-2 gap-12 mb-24">
             
             {/* Idea Lab Screenshot */}
             <div className="group">
               <div className="mb-6">
-                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Idea Lab</h3>
-                <p className="text-sm text-black/60">
+                <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Idea Lab</h3>
+                <p className="text-base text-black/60">
                   Brainstorm and develop content ideas through a structured 3-phase workflow—from raw concepts to fully-formed strategies.
                 </p>
               </div>
-              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
+              <div className="relative rounded-xl overflow-hidden shadow-[0_16px_60px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_25px_80px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
                 <Image
                   src="/screenshots/idea-lab.png"
                   alt="Mark Idea Lab - 3-phase brainstorming workflow for content creators"
-                  width={450}
+                  width={680}
                   height={510}
                   className="w-full h-auto"
                 />
@@ -363,41 +365,41 @@ export default function MarketingHome() {
             {/* Projects Screenshot */}
             <div className="group">
               <div className="mb-6">
-                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Projects</h3>
-                <p className="text-sm text-black/60">
+                <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Projects</h3>
+                <p className="text-base text-black/60">
                   Organize campaigns and initiatives in dedicated project spaces with summaries, artifacts, briefs, and task tracking.
                 </p>
               </div>
-              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
+              <div className="relative rounded-xl overflow-hidden shadow-[0_16px_60px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_25px_80px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
                 <Image
                   src="/screenshots/projects-view.png"
                   alt="Mark Projects - Organize campaigns and track progress in dedicated workspaces"
-                  width={450}
+                  width={680}
                   height={510}
                   className="w-full h-auto"
                 />
               </div>
             </div>
 
-            {/* Daily News Insights Screenshot */}
-            <div className="group">
-              <div className="mb-6">
-                <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-3">Daily News Insights</h3>
-                <p className="text-sm text-black/60">
-                  Get personalized news and trends curated for your niche every morning—stay ahead of the conversation without the noise.
-                </p>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-[0_12px_50px_rgba(0,0,0,0.1)] border border-black/5 hover:shadow-[0_20px_70px_rgba(0,0,0,0.15)] transition-all duration-500 group-hover:scale-[1.02]">
-                <Image
-                  src="/screenshots/daily-news.png"
-                  alt="Mark Daily News - Personalized news insights for content creators"
-                  width={450}
-                  height={510}
-                  className="w-full h-auto"
-                />
-              </div>
-            </div>
+          </div>
 
+          {/* Row 2: Daily News - Full Width */}
+          <div className="group">
+            <div className="mb-6 text-center">
+              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Daily News Insights</h3>
+              <p className="text-base text-black/60 max-w-2xl mx-auto">
+                Get personalized news and trends curated for your niche every morning—stay ahead of the conversation without the noise.
+              </p>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
+              <Image
+                src="/screenshots/daily-news.png"
+                alt="Mark Daily News - Personalized news insights for content creators"
+                width={1400}
+                height={787}
+                className="w-full h-auto"
+              />
+            </div>
           </div>
 
           {/* Conversational Threads Screenshot - Full Width */}

@@ -279,28 +279,134 @@ export default function MarketingHome() {
       </section>
 
       {/* ================================================== */}
-      {/* FEATURES */}
+      {/* ROADMAP TO BETA TIMELINE */}
       {/* ================================================== */}
-      <section className="px-8 py-28 max-w-6xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
-        <div className="reveal animate-fade-in-up">
-          <FeatureCard
-            title="Brand Memory System"
-            desc="Mark remembers your brand voice, style guidelines, and audience insights—so every piece of content stays on-brand without you repeating yourself."
-          />
+      <section className="px-8 py-32 max-w-6xl mx-auto relative z-10 reveal">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
+            Roadmap to Beta
+          </h2>
+          <p className="text-lg text-black/70 max-w-2xl mx-auto">
+            Building Mark in public. Follow our journey from conception to launch.
+          </p>
         </div>
 
-        <div className="reveal animate-fade-in-up">
-          <FeatureCard
-            title="Idea Lab"
-            desc="Brainstorm and develop content ideas through a structured 3-phase workflow—from raw concepts to fully-formed strategies ready to execute."
-          />
+        {/* Timeline */}
+        <div className="relative">
+          
+          {/* Vertical Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D]" />
+
+          {/* Milestone 1: Development Start */}
+          <div className="relative mb-24">
+            <div className="flex items-center justify-between">
+              {/* Left Content */}
+              <div className="w-5/12 text-right pr-12">
+                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
+                  <span className="inline-block px-3 py-1 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-full text-xs font-bold mb-3">
+                    COMPLETED
+                  </span>
+                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Development Start</h3>
+                  <p className="text-sm text-black/60 mb-2">Building the foundation of your marketing OS</p>
+                  <p className="text-lg font-bold text-[#FF6A1A]">October 17, 2025</p>
+                </div>
+              </div>
+
+              {/* Center Dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FF6A1A] rounded-full border-4 border-white shadow-lg z-10" />
+
+              {/* Right Space */}
+              <div className="w-5/12" />
+            </div>
+          </div>
+
+          {/* Milestone 2: Alpha Testing */}
+          <div className="relative mb-24">
+            <div className="flex items-center justify-between">
+              {/* Left Space */}
+              <div className="w-5/12" />
+
+              {/* Center Dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FF8A1A] rounded-full border-4 border-white shadow-lg z-10" />
+
+              {/* Right Content */}
+              <div className="w-5/12 text-left pl-12">
+                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
+                  <span className="inline-block px-3 py-1 bg-[#FF8A1A]/10 text-[#FF8A1A] rounded-full text-xs font-bold mb-3">
+                    IN PROGRESS
+                  </span>
+                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Alpha Testing</h3>
+                  <p className="text-sm text-black/60 mb-2">Core features live, internal testing underway</p>
+                  <p className="text-lg font-bold text-[#FF8A1A]">December 2025</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Milestone 3: Private Beta */}
+          <div className="relative mb-24">
+            <div className="flex items-center justify-between">
+              {/* Left Content */}
+              <div className="w-5/12 text-right pr-12">
+                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
+                  <span className="inline-block px-3 py-1 bg-[#FFA84D]/10 text-[#FFA84D] rounded-full text-xs font-bold mb-3">
+                    UPCOMING
+                  </span>
+                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Private Beta</h3>
+                  <p className="text-sm text-black/60 mb-2">Waitlist members get early access</p>
+                  <p className="text-lg font-bold text-[#FFA84D]">Early January 2026</p>
+                </div>
+              </div>
+
+              {/* Center Dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FFA84D] rounded-full border-4 border-white shadow-lg z-10" />
+
+              {/* Right Space */}
+              <div className="w-5/12" />
+            </div>
+          </div>
+
+          {/* Milestone 4: Beta Launch */}
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              {/* Left Space */}
+              <div className="w-5/12" />
+
+              {/* Center Dot - HERO */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-[#FF6A1A] to-[#FFB84D] rounded-full border-4 border-white shadow-[0_0_30px_rgba(255,106,26,0.5)] z-10 animate-pulse" />
+
+              {/* Right Content */}
+              <div className="w-5/12 text-left pl-12">
+                <div className="inline-block bg-gradient-to-br from-[#FF6A1A]/10 to-[#FFB84D]/10 backdrop-blur-md border-2 border-[#FF6A1A]/30 rounded-2xl shadow-[0_20px_60px_rgba(255,106,26,0.3)] p-8 hover:shadow-[0_30px_80px_rgba(255,106,26,0.4)] transition-all">
+                  <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-[#FF6A1A] to-[#FFB84D] text-white rounded-full text-sm font-bold mb-4">
+                    🚀 BETA LAUNCH
+                  </span>
+                  <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Mark Pro Beta</h3>
+                  <p className="text-base text-black/70 mb-4">Public beta launch for all waitlist members</p>
+                  <p className="text-2xl font-extrabold bg-gradient-to-r from-[#FF6A1A] to-[#FFB84D] bg-clip-text text-transparent">
+                    January 22, 2026
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div className="reveal animate-fade-in-up">
-          <FeatureCard
-            title="Daily News Insights"
-            desc="Get personalized news and trends curated for your niche every morning, so you're always ahead of the conversation and never miss what matters."
-          />
+        {/* Pricing Info */}
+        <div className="mt-24 text-center">
+          <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-8 max-w-2xl">
+            <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-4">Subscription-Based Premium Service</h3>
+            <p className="text-base text-black/70 mb-4">
+              Mark Pro will be a single-tier subscription designed for serious marketers and creators who want the best tools for their craft.
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-lg font-semibold text-black/60">Pricing:</span>
+              <span className="px-4 py-2 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-lg font-bold">
+                Premium • TBA
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 

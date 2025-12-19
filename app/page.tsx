@@ -526,6 +526,98 @@ export default function MarketingHome() {
       </section>
 
       {/* ================================================== */}
+      {/* BUILDING IN PUBLIC - YOUTUBE VIDEO */}
+      {/* ================================================== */}
+      <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF6A1A]/10 rounded-full mb-6">
+            <span className="text-2xl">🎬</span>
+            <span className="text-sm font-bold text-[#FF6A1A] uppercase tracking-wide">Building in Public</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
+            Follow the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Journey</span>
+          </h2>
+          <p className="text-lg text-black/70 max-w-2xl mx-auto">
+            Watch as we build Mark from the ground up. Episode 1: The current state of development, architecture decisions, and what's coming next.
+          </p>
+        </div>
+
+        {/* Video Container */}
+        <div className="max-w-5xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(255,106,26,0.25)] border border-[#FF6A1A]/20 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm p-4 md:p-6 hover:shadow-[0_30px_100px_rgba(255,106,26,0.35)] transition-all duration-500">
+            
+            {/* Episode Badge */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] text-white rounded-full text-xs font-bold">
+                  EPISODE 1
+                </span>
+                <span className="text-sm font-semibold text-black/70">Development Deep Dive</span>
+              </div>
+              <a
+                href="https://www.youtube.com/@usemarkapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-black/60 hover:text-[#FF6A1A] transition-colors"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span className="font-medium">Subscribe</span>
+              </a>
+            </div>
+
+            {/* YouTube Embed */}
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                src="https://www.youtube.com/embed/LM586RHnauE"
+                title="Building Mark in Public - Episode 1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+
+            {/* Video Description */}
+            <div className="mt-4 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-black/5">
+              <p className="text-sm text-black/70 leading-relaxed">
+                In this episode, I walk through where Mark is right now—the architecture, the features we've built, and the roadmap ahead. This is the first episode in our building in public series, where you'll get an inside look at every step of creating a modern marketing OS.
+              </p>
+            </div>
+
+            {/* Series Indicator */}
+            <div className="mt-4 flex items-center justify-center gap-2 text-xs text-black/50">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>Part of the Building in Public series • More episodes coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Below Video */}
+        <div className="mt-12 text-center">
+          <p className="text-base text-black/70 mb-4">
+            Want to be part of the journey from the start?
+          </p>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+          >
+            <span>Join the Waitlist</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      {/* ================================================== */}
       {/* DEMO PREVIEW - SCREENSHOTS */}
       {/* ================================================== */}
       <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">

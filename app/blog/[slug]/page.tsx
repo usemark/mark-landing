@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPostSlugs, getPostData } from "@/lib/blog";
+import MarketingNav from "@/components/MarketingNav";
 
 // Generate static paths for all blog posts
 export async function generateStaticParams() {
@@ -51,24 +52,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <nav className="w-full flex justify-between items-center px-8 py-6 border-b bg-white/70 backdrop-blur-lg sticky top-0 z-50">
-        <Link href="/">
-          <Image
-            src="/mark-logo.png"
-            alt="Mark Logo"
-            width={80}
-            height={26}
-            className="object-contain cursor-pointer"
-            priority
-          />
-        </Link>
-        <Link 
-          href="/blog"
-          className="text-sm font-medium text-black/70 hover:text-[#FF6A1A] transition"
-        >
-          ← Back to Blog
-        </Link>
-      </nav>
+      <MarketingNav />
 
       {/* Article */}
       <article className="px-8 py-16 max-w-3xl mx-auto">

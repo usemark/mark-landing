@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import MarketingNav from "@/components/MarketingNav";
 
 interface BlogPost {
   slug: string;
@@ -59,24 +60,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <nav className="w-full flex justify-between items-center px-8 py-6 border-b bg-white/70 backdrop-blur-lg sticky top-0 z-50">
-        <Link href="/">
-          <Image
-            src="/mark-logo.png"
-            alt="Mark Logo"
-            width={80}
-            height={26}
-            className="object-contain cursor-pointer"
-            priority
-          />
-        </Link>
-        <Link 
-          href="/"
-          className="text-sm font-medium text-black/70 hover:text-[#FF6A1A] transition"
-        >
-          ← Back to Home
-        </Link>
-      </nav>
+      <MarketingNav />
 
       {/* Hero Section */}
       <section className="px-8 py-20 max-w-4xl mx-auto text-center">

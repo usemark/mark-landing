@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-export default function CheckoutHandlerPage() {
+function CheckoutHandlerContent() {
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("Creating checkout session...");
@@ -106,5 +106,17 @@ export default function CheckoutHandlerPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function CheckoutHandlerPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex items-center justify-center px-6">
+        <div className="w-16 h-16 border-4 border-[#FF6A1A]/20 border-t-[#FF6A1A] rounded-full animate-spin" />
+      </main>
+    }>
+      <CheckoutHandlerContent />
+    </Suspense>
   );
 }

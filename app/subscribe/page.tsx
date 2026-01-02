@@ -212,12 +212,13 @@ export default function SubscribePage() {
                 )}
               </div>
 
-              <a
-                href={`${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/login?sign-up=true`}
-                className="block w-full py-4 px-6 bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D] text-white font-bold text-center rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+              <button
+                disabled
+                className="block w-full py-4 px-6 bg-gray-300 text-gray-500 font-bold text-center rounded-xl shadow-lg cursor-not-allowed opacity-60"
+                title="Signups currently disabled"
               >
-                Start 7-Day Free Trial
-              </a>
+                Signups Temporarily Disabled
+              </button>
               
               <p className="text-xs text-center text-black/50 mt-3">
                 No credit card required • Cancel anytime

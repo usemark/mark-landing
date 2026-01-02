@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 export default function SubscribeSuccessPage() {
@@ -42,8 +41,8 @@ export default function SubscribeSuccessPage() {
 
         {/* CTA Button */}
         <div className="flex justify-center">
-          <Link 
-            href="https://app.usemark.app"
+          <a 
+            href={process.env.NEXT_PUBLIC_APP_URL || "https://app.usemark.app"}
             className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D] hover:opacity-90 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <span>Access Mark Now</span>
@@ -55,7 +54,7 @@ export default function SubscribeSuccessPage() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </Link>
+          </a>
         </div>
 
         {/* Support Message */}

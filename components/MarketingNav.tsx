@@ -13,7 +13,8 @@ export default function MarketingNav() {
   const isBlog = pathname?.startsWith("/blog");
 
   return (
-    <nav className="w-full flex justify-between items-center px-8 py-6 border-b bg-white/70 backdrop-blur-lg relative z-10">
+    <nav className="w-full flex justify-between items-center px-8 py-6 border-b bg-white/95 relative z-10">
+      {/* PERFORMANCE: Replaced backdrop-blur-lg with solid bg-white/95 to eliminate expensive backdrop filter during scroll */}
       <Link href="/">
         <Image
           src="/mark-logo.png"
@@ -26,53 +27,53 @@ export default function MarketingNav() {
       </Link>
 
       <div className="flex items-center gap-4">
-        {/* Home Link */}
+        {/* Home Link - PERFORMANCE: Removed backdrop-blur-md, hover:shadow-lg, using transform only */}
         <Link
           href="/"
-          className={`px-4 py-2 rounded-full backdrop-blur-md border shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-medium ${
+          className={`px-4 py-2 rounded-full border shadow-md hover:scale-105 transition-transform duration-200 text-sm font-medium ${
             isHome
-              ? "bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D] text-white border-transparent font-semibold"
-              : "bg-white/80 border-black/5 text-black/80 hover:text-[#FF6A1A]"
+              ? "bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white border-transparent font-semibold"
+              : "bg-white/95 border-black/5 text-black/80 hover:text-[#FF6A1A]"
           }`}
         >
           Home
         </Link>
 
-        {/* Subscribe Button */}
+        {/* Subscribe Button - PERFORMANCE: Same optimizations */}
         <Link
           href="/subscribe"
-          className={`px-4 py-2 rounded-full backdrop-blur-md border shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-medium ${
+          className={`px-4 py-2 rounded-full border shadow-md hover:scale-105 transition-transform duration-200 text-sm font-medium ${
             isSubscribe
-              ? "bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D] text-white border-transparent font-semibold"
-              : "bg-white/80 border-black/5 text-black/80 hover:text-[#FF6A1A]"
+              ? "bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white border-transparent font-semibold"
+              : "bg-white/95 border-black/5 text-black/80 hover:text-[#FF6A1A]"
           }`}
         >
           Subscribe
         </Link>
 
-        {/* Blog Link */}
+        {/* Blog Link - PERFORMANCE: Same optimizations */}
         <Link
           href="/blog"
-          className={`px-4 py-2 rounded-full backdrop-blur-md border shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-medium ${
+          className={`px-4 py-2 rounded-full border shadow-md hover:scale-105 transition-transform duration-200 text-sm font-medium ${
             isBlog
-              ? "bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D] text-white border-transparent font-semibold"
-              : "bg-white/80 border-black/5 text-black/80 hover:text-[#FF6A1A]"
+              ? "bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white border-transparent font-semibold"
+              : "bg-white/95 border-black/5 text-black/80 hover:text-[#FF6A1A]"
           }`}
         >
           Blog
         </Link>
 
-        {/* Go to App Button */}
+        {/* Go to App Button - PERFORMANCE: Removed hover:shadow-xl, using transform only */}
         <a
           href={`${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/login`}
-          className="px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm"
+          className="px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white font-bold shadow-lg hover:scale-105 transition-transform duration-200 text-sm"
         >
           Go to App →
         </a>
 
-        {/* Follow Us Dropdown */}
+        {/* Follow Us Dropdown - PERFORMANCE: Removed shadow transition */}
         <div className="group relative">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-md hover:shadow-lg hover:scale-105 transition-all">
+          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 border border-black/5 shadow-md hover:scale-105 transition-transform duration-200">
             <svg className="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
             </svg>
@@ -84,7 +85,8 @@ export default function MarketingNav() {
 
           {/* Dropdown Menu */}
           <div className="absolute right-0 top-full pt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-            <div className="bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="bg-white/98 border border-black/10 rounded-2xl shadow-2xl overflow-hidden">
+              {/* PERFORMANCE: Removed backdrop-blur-xl */}
               <div className="p-2 space-y-1">
                 <a
                   href="https://x.com/usemarkapp"

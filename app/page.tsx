@@ -48,51 +48,9 @@ export default function MarketingHome() {
   }, []);
 
   /* ============================= */
-  /* CLIENT-ONLY PARTICLES         */
+  /* PERFORMANCE: Removed particles, scroll tracking, and cursor tracking */
+  /* These caused continuous animations and React state updates */
   /* ============================= */
-  const [particles, setParticles] = useState<
-    { top: string; left: string; delay: string }[]
-  >([]);
-
-  useEffect(() => {
-    const arr = Array.from({ length: 18 }).map(() => ({
-      top: `${Math.random() * 90}%`,
-      left: `${Math.random() * 90}%`,
-      delay: `${Math.random() * 3}s`,
-    }));
-    setParticles(arr);
-  }, []);
-
-  /* ============================= */
-  /* PARALLAX SCROLL STATE         */
-  /* ============================= */
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (typeof window !== "undefined") {
-        setScrollY(window.scrollY || window.pageYOffset);
-      }
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  /* ============================= */
-  /* CURSOR SPOTLIGHT STATE        */
-  /* ============================= */
-  const [cursorPos, setCursorPos] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setCursorPos({ x, y });
-  };
 
   /* ============================= */
   /* WAITLIST FORM STATE           */
@@ -131,64 +89,23 @@ export default function MarketingHome() {
   return (
     <main
       className="min-h-screen bg-white relative overflow-hidden flex flex-col"
-      onMouseMove={handleMouseMove}
     >
+      {/* PERFORMANCE: Removed onMouseMove handler that triggered state updates on every pixel */}
 
       {/* ================================================== */}
-      {/* BACKGROUND GLOWS + WAVE + PARTICLES + SPOTLIGHT   */}
+      {/* BACKGROUND ELEMENTS                               */}
+      {/* PERFORMANCE: Removed orange blur gradients entirely - they were causing */}
+      {/* expensive CSS filter operations even at reduced blur radius */}
       {/* ================================================== */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* ORANGE GRADIENTS */}
-        <div
-          className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[1600px] h-[1600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,106,26,0.55),rgba(255,180,120,0.20),transparent_70%)] blur-[260px]"
-          style={{ transform: `translate3d(0, ${scrollY * -0.05}px, 0)` }}
-        />
-        <div
-          className="absolute top-[40%] left-[20%] w-[1100px] h-[1100px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,90,0,0.22),transparent_70%)] blur-[210px]"
-          style={{ transform: `translate3d(0, ${scrollY * -0.03}px, 0)` }}
-        />
+        {/* PERFORMANCE: Orange gradient blurs REMOVED - too expensive for scroll performance */}
+        {/* If you want subtle color, use a static CSS gradient without blur filter */}
 
-        {/* ANIMATED BACKGROUND WAVE */}
-        <div
-          className="absolute bottom-[-2rem] left-0 w-[200%] h-40 opacity-[0.28] overflow-hidden"
-          style={{ transform: `translate3d(0, ${scrollY * 0.05}px, 0)` }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="200%"
-            height="100%"
-            viewBox="0 0 1440 320"
-            className="animate-wave"
-          >
-            <path
-              fill="#FF6A1A"
-              fillOpacity="0.18"
-              d="M0,256L48,250.7C96,245,192,235,288,229.3C384,224,480,224,576,229.3C672,235,768,245,864,240C960,235,1056,213,1152,208C1248,203,1344,213,1392,218.7L1440,224V320H0Z"
-            />
-          </svg>
-        </div>
+        {/* PERFORMANCE: Removed animated wave SVG - continuous CSS animation hurts scroll */}
+        {/* The wave used animate-wave which ran constantly */}
 
-        {/* FLOATING PARTICLES — CLIENT ONLY */}
-        {particles.map((p, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white/70 rounded-full animate-sparkle"
-            style={{
-              top: p.top,
-              left: p.left,
-              animationDelay: p.delay,
-            }}
-          />
-        ))}
-
-        {/* CURSOR SPOTLIGHT */}
-        <div
-          className="cursor-spotlight"
-          style={{
-            top: `${cursorPos.y}px`,
-            left: `${cursorPos.x}px`,
-          }}
-        />
+        {/* PERFORMANCE: Removed floating particles - 8 concurrent CSS animations add up */}
+        {/* Each particle had animate-sparkle running continuously */}
       </div>
 
       {/* ================================================== */}
@@ -197,207 +114,245 @@ export default function MarketingHome() {
       <MarketingNav />
 
       {/* ================================================== */}
-      {/* HERO */}
+      {/* HERO SECTION - Bold transformation */}
       {/* ================================================== */}
-      <section className="px-8 py-40 max-w-5xl mx-auto text-center relative z-10">
-        <h1 className="text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.9] text-[#0A0A0A]">
-          <span className="block animate-hero-left">Make your</span>
-          <span className="block text-[#FF6A1A] animate-hero-right">Mark.</span>
-        </h1>
+      <section className="pt-32 pb-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-8">
+          {/* The Hero Statement */}
+          <div className="text-center mb-20">
+            {/* Make Your Mark tagline */}
+            <p className="inline-block mb-6 text-lg md:text-xl font-bold tracking-wide">
+              <span className="text-[#0A0A0A]">Make Your </span>
+              <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">Mark</span>
+            </p>
+            <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight text-[#0A0A0A] leading-[0.95]">
+              Stop re-explaining yourself.
+              <br />
+              <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">Start creating.</span>
+            </h1>
+            <p className="mt-8 text-xl md:text-2xl text-black/60 max-w-2xl mx-auto">
+              The AI marketing assistant with permanent brand memory.
+            </p>
 
-        <p className="mt-8 text-xl md:text-2xl font-medium text-black/70 max-w-3xl mx-auto leading-relaxed">
-          Mark is your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">marketing operating system</span>—an AI-powered workspace where brand memory, content strategy, and daily insights come together in one place.
-        </p>
+            {/* CTA BUTTON */}
+            <div className="mt-10 flex justify-center">
+              <button
+                onClick={(e) => toggleHeroWaitlist(e.currentTarget)}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold tracking-tight rounded-full bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white shadow-lg hover:scale-105 transition-transform duration-200"
+              >
+                <span>
+                  {showHeroWaitlist ? "Hide form" : "Join the early access list"}
+                </span>
+              </button>
+            </div>
 
-        {/* CTA BUTTON */}
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={(e) => toggleHeroWaitlist(e.currentTarget)}
-            className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-3 text-sm md:text-[15px] font-semibold tracking-tight"
-          >
-            <span className="text-white">
-              {showHeroWaitlist ? "Hide form" : "Join the early access list"}
-            </span>
-          </button>
-        </div>
-
-        {/* EXPANDING FORM */}
-        <div
-          className={`transition-all duration-700 overflow-hidden ${
-            showHeroWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
-          }`}
-        >
-          <form
-            action="https://app.kit.com/forms/8813748/subscriptions"
-            method="post"
-            className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
-          >
-            {/* Redirect to thank-you page */}
-            <input
-              type="hidden"
-              name="redirect_url"
-              value="https://usemark.app/thank-you"
-            />
-
-            {/* First Name */}
-            <input
-              type="text"
-              name="fields[first_name]"
-              placeholder="First Name"
-              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
-              required
-            />
-
-            {/* Last Name */}
-            <input
-              type="text"
-              name="fields[last_name]"
-              placeholder="Last Name"
-              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
-              required
-            />
-
-            {/* Email */}
-            <input
-              type="email"
-              name="email_address"
-              placeholder="Email Address"
-              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
-              required
-            />
-
-            {/* Submit */}
-            <button
-              type="submit"
-              className="w-full py-3 bg-[#FF6A1A] hover:bg-[#ff7e3a] transition text-white font-semibold rounded-lg shadow-lg"
+            {/* EXPANDING FORM */}
+            <div
+              className={`transition-all duration-700 overflow-hidden ${
+                showHeroWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
+              }`}
             >
-              Join Early Access
-            </button>
+              <form
+                action="https://app.kit.com/forms/8813748/subscriptions"
+                method="post"
+                className="bg-[#0A0A0A] border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
+              >
+                <input
+                  type="hidden"
+                  name="redirect_url"
+                  value="https://usemark.app/thank-you"
+                />
 
-            {/* No spam text */}
-            <p className="text-[11px] text-white/50 text-center">
-              No spam. You'll only hear from me when Mark is ready for you.
-            </p>
-          </form>
-        </div>
+                <input
+                  type="text"
+                  name="fields[first_name]"
+                  placeholder="First Name"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                  required
+                />
 
-        {/* GLASS CARD */}
-        <div className="mt-20 flex justify-center">
-          <div className="backdrop-blur-xl bg-white/30 border border-white/50 shadow-xl rounded-3xl px-12 py-10 max-w-xl animate-fade-in-up">
-            <p className="text-lg text-[#0A0A0A] leading-relaxed font-medium">
-              Think of Mark as your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">marketing command center</span>—a single system that handles everything from campaign strategy to brand consistency, built for marketers and creators who share content online.
-            </p>
+                <input
+                  type="text"
+                  name="fields[last_name]"
+                  placeholder="Last Name"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                  required
+                />
+
+                <input
+                  type="email"
+                  name="email_address"
+                  placeholder="Email Address"
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF6A1A]"
+                  required
+                />
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] hover:opacity-90 transition text-white font-semibold rounded-lg shadow-lg"
+                >
+                  Join Early Access
+                </button>
+
+                <p className="text-[11px] text-white/50 text-center">
+                  No spam. You'll only hear from me when Mark is ready for you.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          {/* The Visual Transformation - Oversized contrast */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            {/* LEFT: Without Mark - The cost of repetition (RED focus) */}
+            <div className="relative group">
+              {/* Bold red glow border */}
+              <div className="absolute -inset-[2px] bg-gradient-to-b from-red-500 via-red-600/60 to-red-700/40 rounded-3xl" />
+              <div className="relative bg-gradient-to-b from-[#1A0A0A] to-[#0A0A0A] rounded-3xl p-10 h-full min-h-[450px] flex flex-col border border-red-500/30">
+                {/* Top accent line */}
+                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-red-500/70 to-transparent" />
+                
+                {/* Strikethrough label */}
+                <div className="mb-6">
+                  <span className="text-red-400 text-sm font-medium uppercase tracking-widest line-through decoration-red-500 decoration-2">
+                    Average AI Tool
+                  </span>
+                </div>
+                
+                {/* The endless loop visualization */}
+                <div className="flex-1 flex flex-col justify-center items-center">
+                  {/* Giant X mark */}
+                  <div className="text-center mb-8">
+                    <span className="text-8xl md:text-9xl font-black text-red-500/40">✕</span>
+                    <p className="text-white font-bold text-2xl mt-4">Re-explained. Again.</p>
+                  </div>
+                  
+                  {/* Repeated context message - glass effect */}
+                  <div className="bg-red-500/10 border border-red-500/40 rounded-2xl px-6 py-4 max-w-sm">
+                    <p className="text-white/70 text-base italic">
+                      "Let me give you some context about my business, my audience, my goals..."
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom tagline */}
+                <p className="text-red-400 text-lg text-center mt-6 font-medium">
+                  Every prompt starts from zero.
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT: With Mark - The relief of continuity (GREEN focus) */}
+            <div className="relative group">
+              {/* Single bold emerald glow border */}
+              <div className="absolute -inset-[2px] bg-gradient-to-b from-emerald-300 via-emerald-400 to-emerald-500 rounded-3xl" />
+              <div className="relative bg-gradient-to-b from-[#0A2418] to-[#0A1A10] rounded-3xl p-10 h-full min-h-[450px] flex flex-col">
+                {/* Top accent line */}
+                <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-emerald-300 to-transparent" />
+                
+                {/* Mark label */}
+                <div className="mb-6">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-gradient-to-r from-emerald-300 to-emerald-400" />
+                    <span className="bg-gradient-to-r from-emerald-300 to-emerald-400 bg-clip-text text-transparent text-sm font-bold uppercase tracking-widest">
+                      With Mark
+                    </span>
+                  </span>
+                </div>
+                
+                {/* The result - bold statement */}
+                <div className="flex-1 flex flex-col justify-center items-center">
+                  {/* Giant checkmark - vibrant */}
+                  <div className="text-center mb-8">
+                    <span className="text-8xl md:text-9xl font-black bg-gradient-to-r from-emerald-300 to-emerald-400 bg-clip-text text-transparent">✓</span>
+                    <p className="text-white font-bold text-2xl mt-4">Your business, remembered.</p>
+                  </div>
+                  
+                  {/* Mark knows - glass effect */}
+                  <div className="bg-emerald-400/20 border border-emerald-400/70 rounded-2xl px-6 py-4 max-w-sm">
+                    <p className="text-white text-base">
+                      <span className="text-emerald-300 font-bold">"I have the context."</span> Your brand, goals, audience, and history—already here.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom tagline */}
+                <p className="bg-gradient-to-r from-emerald-300 to-emerald-400 bg-clip-text text-transparent text-lg text-center mt-6 font-bold">
+                  Set once. Built on forever.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ================================================== */}
-      {/* ROADMAP TO BETA TIMELINE */}
+      {/* FEATURES SECTION - Light background with dark cards */}
       {/* ================================================== */}
-      <section className="px-8 py-32 max-w-6xl mx-auto relative z-10 reveal">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-            Roadmap to <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Beta</span>
-          </h2>
-          <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Building Mark <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-semibold">in public</span>. Follow our journey from conception to launch.
-          </p>
-        </div>
-
-        {/* Timeline */}
-        <div className="relative">
-          
-          {/* Vertical Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#FF6A1A] via-[#FF8A1A] to-[#FFB84D]" />
-
-          {/* Milestone 1: Development Start */}
-          <div className="relative mb-24">
-            <div className="flex items-center justify-between">
-              {/* Left Content */}
-              <div className="w-5/12 text-right pr-12">
-                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
-                  <span className="inline-block px-3 py-1 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-full text-xs font-bold mb-3">
-                    COMPLETED
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Development Start</h3>
-                  <p className="text-sm text-black/60 mb-2">Building the foundation of your marketing OS</p>
-                  <p className="text-lg font-bold text-[#FF6A1A]">October 17, 2025</p>
-                </div>
-              </div>
-
-              {/* Center Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FF6A1A] rounded-full border-4 border-white shadow-lg z-10" />
-
-              {/* Right Space */}
-              <div className="w-5/12" />
-            </div>
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#0A0A0A] tracking-tight">
+              Everything you need. <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">Nothing you don't.</span>
+            </h2>
           </div>
 
-          {/* Milestone 2: Alpha Testing */}
-          <div className="relative mb-24">
-            <div className="flex items-center justify-between">
-              {/* Left Space */}
-              <div className="w-5/12" />
-
-              {/* Center Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#FF8A1A] rounded-full border-4 border-white shadow-lg z-10" />
-
-              {/* Right Content */}
-              <div className="w-5/12 text-left pl-12">
-                <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
-                  <span className="inline-block px-3 py-1 bg-[#FF8A1A]/10 text-[#FF8A1A] rounded-full text-xs font-bold mb-3">
-                    IN PROGRESS
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-2">Alpha Testing</h3>
-                  <p className="text-sm text-black/60 mb-2">Core features live, internal testing underway</p>
-                  <p className="text-lg font-bold text-[#FF8A1A]">December 2025</p>
-                </div>
+          {/* Feature Grid - 2x2 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* Feature 1: Never Forgets */}
+            <div className="bg-[#0A0A0A] border border-black/10 rounded-2xl p-8 hover:border-[#FF6A1A]/50 transition-colors duration-300 shadow-lg">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Mark never forgets</h3>
+              <p className="text-white/60 text-lg leading-relaxed">
+                Your brand voice, audience, goals, and strategy—permanently stored. No more starting from scratch.
+              </p>
             </div>
-          </div>
-
-          {/* Milestone 3: Beta Launch */}
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              {/* Left Content */}
-              <div className="w-5/12 text-right pr-12">
-                <div className="inline-block bg-gradient-to-br from-[#FF6A1A]/10 to-[#FFB84D]/10 backdrop-blur-md border-2 border-[#FF6A1A]/30 rounded-2xl shadow-[0_20px_60px_rgba(255,106,26,0.3)] p-8 hover:shadow-[0_30px_80px_rgba(255,106,26,0.4)] transition-all">
-                  <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-[#FF6A1A] to-[#FFB84D] text-white rounded-full text-sm font-bold mb-4">
-                    🚀 BETA LAUNCH
-                  </span>
-                  <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">Mark Pro Beta</h3>
-                  <p className="text-base text-black/70 mb-4">Public beta launch for all waitlist members</p>
-                  <p className="text-2xl font-extrabold bg-gradient-to-r from-[#FF6A1A] to-[#FFB84D] bg-clip-text text-transparent">
-                    January 22, 2026
-                  </p>
-                </div>
+            
+            {/* Feature 2: References & Cites */}
+            <div className="bg-[#0A0A0A] border border-black/10 rounded-2xl p-8 hover:border-[#FF6A1A]/50 transition-colors duration-300 shadow-lg">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
               </div>
-
-              {/* Center Dot - HERO */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-[#FF6A1A] to-[#FFB84D] rounded-full border-4 border-white shadow-[0_0_30px_rgba(255,106,26,0.5)] z-10 animate-pulse" />
-
-              {/* Right Space */}
-              <div className="w-5/12" />
+              <h3 className="text-2xl font-bold text-white mb-3">Cites its sources</h3>
+              <p className="text-white/60 text-lg leading-relaxed">
+                Mark references your previous conversations and shows exactly where insights come from.
+              </p>
             </div>
-          </div>
-
-        </div>
-
-        {/* Pricing Info */}
-        <div className="mt-24 text-center">
-          <div className="inline-block bg-white/80 backdrop-blur-md border border-black/5 rounded-2xl shadow-lg p-8 max-w-2xl">
-            <h3 className="text-2xl font-extrabold text-[#0A0A0A] mb-4">
-              Subscription-Based <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Premium Service</span>
-            </h3>
-            <p className="text-base text-black/70 mb-4">
-              Mark Pro will be a single-tier subscription designed for serious marketers and creators who want the best tools for their craft.
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-lg font-semibold text-black/60">Pricing:</span>
-              <span className="px-4 py-2 bg-[#FF6A1A]/10 text-[#FF6A1A] rounded-lg font-bold">
-                Premium • TBA
-              </span>
+            
+            {/* Feature 3: Unified Tools */}
+            <div className="bg-[#0A0A0A] border border-black/10 rounded-2xl p-8 hover:border-[#FF6A1A]/50 transition-colors duration-300 shadow-lg">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">One unified workspace</h3>
+              <p className="text-white/60 text-lg leading-relaxed">
+                AI powered copy, strategy, execution, to-do organization, note taking—all your social media marketing needs in one place.
+              </p>
             </div>
+            
+            {/* Feature 4: Daily Insights */}
+            <div className="bg-[#0A0A0A] border border-black/10 rounded-2xl p-8 hover:border-[#FF6A1A]/50 transition-colors duration-300 shadow-lg">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Stay ahead</h3>
+              <p className="text-white/60 text-lg leading-relaxed">
+                Daily personalized news and trends tailored to your industry sent right to your front page.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -405,257 +360,138 @@ export default function MarketingHome() {
       {/* ================================================== */}
       {/* BUILDING IN PUBLIC - YOUTUBE VIDEO */}
       {/* ================================================== */}
-      <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF6A1A]/10 rounded-full mb-6">
-            <span className="text-2xl">🎬</span>
-            <span className="text-sm font-bold text-[#FF6A1A] uppercase tracking-wide">Building in Public</span>
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 rounded-full mb-6 border border-black/10">
+              <span className="text-2xl">🎬</span>
+              <span className="text-sm font-bold text-[#0A0A0A] uppercase tracking-wide">Building in Public</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
+              Follow the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">Journey</span>
+            </h2>
+            <p className="text-lg text-black/60 max-w-2xl mx-auto">
+              Watch as we build Mark from the ground up. Episode 1: The current state of development, architecture decisions, and what's coming next.
+            </p>
           </div>
-          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-            Follow the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Journey</span>
-          </h2>
-          <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Watch as we build Mark from the ground up. Episode 1: The current state of development, architecture decisions, and what's coming next.
-          </p>
-        </div>
 
-        {/* Video Container */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(255,106,26,0.25)] border border-[#FF6A1A]/20 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm p-4 md:p-6 hover:shadow-[0_30px_100px_rgba(255,106,26,0.35)] transition-all duration-500">
+          {/* Video Container */}
+          <div className="max-w-5xl mx-auto">
+            {/* Video card with dark theme styling */}
+            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-black/10 bg-[#0A0A0A] p-4 md:p-6 hover:scale-[1.01] transition-transform duration-300">
             
-            {/* Episode Badge */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="px-3 py-1 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] text-white rounded-full text-xs font-bold">
-                  EPISODE 1
-                </span>
-                <span className="text-sm font-semibold text-black/70">Development Deep Dive</span>
+              {/* Episode Badge */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white rounded-full text-xs font-bold">
+                    EPISODE 1
+                  </span>
+                  <span className="text-sm font-semibold text-white/70">Development Deep Dive</span>
+                </div>
+                <a
+                  href="https://www.youtube.com/@usemarkapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-white/60 hover:text-[#FF6A1A] transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                  <span className="font-medium">Subscribe</span>
+                </a>
               </div>
-              <a
-                href="https://www.youtube.com/@usemarkapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-black/60 hover:text-[#FF6A1A] transition-colors"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+
+              {/* YouTube Embed */}
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  src="https://www.youtube.com/embed/LM586RHnauE"
+                  title="Building Mark in Public - Episode 1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Video Description */}
+              <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10">
+                <p className="text-sm text-white/70 leading-relaxed">
+                  In this episode, I walk through where Mark is right now—the architecture, the features we've built, and the roadmap ahead. This is the first episode in our building in public series, where you'll get an inside look at every step of creating a modern marketing OS.
+                </p>
+              </div>
+
+              {/* Series Indicator */}
+              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white/50">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                <span className="font-medium">Subscribe</span>
-              </a>
+                <span>Part of the Building in Public series • More episodes coming soon</span>
+              </div>
             </div>
+          </div>
 
-            {/* YouTube Embed */}
-            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                className="absolute top-0 left-0 w-full h-full rounded-lg"
-                src="https://www.youtube.com/embed/LM586RHnauE"
-                title="Building Mark in Public - Episode 1"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
-
-            {/* Video Description */}
-            <div className="mt-4 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-black/5">
-              <p className="text-sm text-black/70 leading-relaxed">
-                In this episode, I walk through where Mark is right now—the architecture, the features we've built, and the roadmap ahead. This is the first episode in our building in public series, where you'll get an inside look at every step of creating a modern marketing OS.
-              </p>
-            </div>
-
-            {/* Series Indicator */}
-            <div className="mt-4 flex items-center justify-center gap-2 text-xs text-black/50">
+          {/* CTA Below Video */}
+          <div className="mt-12 text-center">
+            <p className="text-base text-black/60 mb-4">
+              Want to be part of the journey from the start?
+            </p>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+            >
+              <span>Join the Waitlist</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-              <span>Part of the Building in Public series • More episodes coming soon</span>
-            </div>
+            </a>
           </div>
-        </div>
-
-        {/* CTA Below Video */}
-        <div className="mt-12 text-center">
-          <p className="text-base text-black/70 mb-4">
-            Want to be part of the journey from the start?
-          </p>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('section')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-          >
-            <span>Join the Waitlist</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-        </div>
-      </section>
-
-      {/* ================================================== */}
-      {/* DEMO PREVIEW - SCREENSHOTS */}
-      {/* ================================================== */}
-      <section className="px-8 py-32 max-w-[1400px] mx-auto relative z-10 reveal">
-        <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] text-center mb-6">
-          See Mark <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">in Action</span>
-        </h2>
-        <p className="text-lg text-black/70 text-center max-w-2xl mx-auto mb-20">
-          Your marketing operating system in five <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">powerful modules</span>.
-        </p>
-
-        {/* Screenshot Grid - Premium Layout - All Full Width */}
-        <div className="space-y-24">
-          
-          {/* Brand Profile Screenshot - Full Width */}
-          <div className="group">
-            <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
-                Brand <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Memory System</span>
-              </h3>
-              <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Teach Mark your voice, style, and goals—it remembers everything so your content stays consistent across every channel.
-              </p>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
-              <Image
-                src="/screenshots/brand-profile.png"
-                alt="Mark Brand Profile - Build your personalized AI marketing assistant"
-                width={1400}
-                height={787}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
-          </div>
-
-          {/* Idea Lab Screenshot - Full Width */}
-          <div className="group">
-            <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
-                Idea <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Lab</span>
-              </h3>
-              <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Brainstorm and develop campaign ideas through a structured 3-phase workflow—from initial concepts to execution-ready strategies.
-              </p>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
-              <Image
-                src="/screenshots/idea-lab.png"
-                alt="Mark Idea Lab - 3-phase brainstorming workflow for marketers and content creators"
-                width={1400}
-                height={787}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-
-          {/* Projects Screenshot - Full Width */}
-          <div className="group">
-            <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
-                <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Projects</span>
-              </h3>
-              <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Organize campaigns and initiatives in dedicated project spaces with summaries, artifacts, briefs, and task tracking.
-              </p>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
-              <Image
-                src="/screenshots/projects-view.png"
-                alt="Mark Projects - Organize campaigns and track progress in dedicated workspaces"
-                width={1400}
-                height={787}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-
-          {/* Daily News Screenshot - Full Width */}
-          <div className="group">
-            <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
-                Daily News <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Insights</span>
-              </h3>
-              <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Get personalized industry news and trends curated for your market every morning—stay ahead without the noise.
-              </p>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
-              <Image
-                src="/screenshots/daily-news.png"
-                alt="Mark Daily News - Personalized news insights for content creators"
-                width={1400}
-                height={787}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-
-          {/* Conversational Threads Screenshot - Full Width */}
-          <div className="group">
-            <div className="mb-6 text-center">
-              <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-3">
-                Conversational <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Threads</span>
-              </h3>
-              <p className="text-base text-black/60 max-w-2xl mx-auto">
-                Work through strategy, copywriting, and revisions in natural conversations—no complex interfaces, just intelligent dialogue.
-              </p>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.12)] border border-black/5 hover:shadow-[0_30px_100px_rgba(0,0,0,0.18)] transition-all duration-500 group-hover:scale-[1.02]">
-              <Image
-                src="/screenshots/threads-interface.png"
-                alt="Mark Conversational Threads - Natural AI conversations for content strategy"
-                width={1400}
-                height={787}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-
         </div>
       </section>
 
       {/* ================================================== */}
       {/* CTA SECTION (CUSTOM CONVERTKIT FORM + REDIRECT) */}
       {/* ================================================== */}
-      <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#FF6A1A] via-[#FF8A1A] to-[#FF3E00] p-[1px] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-          <div className="bg-[#050505] rounded-3xl px-10 py-10 md:px-12 md:py-12 text-center text-white relative">
-            <div className="absolute inset-0 opacity-40 blur-3xl bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.28),transparent_60%)] pointer-events-none" />
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-4xl mx-auto px-8">
+          {/* Orange gradient border */}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] p-[2px] shadow-2xl">
+            <div className="bg-[#0A0A0A] rounded-3xl px-10 py-10 md:px-12 md:py-12 text-center text-white relative">
 
-            <div className="relative">
-              <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-                Your <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">marketing operating system</span> awaits.
-              </h3>
+              <div className="relative">
+                <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
+                  Never explain your brand <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">again</span>.
+                </h3>
 
-              <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
-                Join the waitlist and be among the first to experience a workspace built for marketers and creators—where strategy, content, and brand memory work together seamlessly.
-              </p>
+                <p className="text-sm md:text-base text-white/75 max-w-xl mx-auto mb-8">
+                  Join the early access list for Mark—the AI workspace that actually remembers who you are, what you're building, and how you sound.
+                </p>
 
-              <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center">
 
-                {/* CTA BUTTON */}
-                <MagneticButton 
-                  onClick={(buttonElement) => toggleCtaWaitlist(buttonElement)}
-                >
-                  <span className="text-white">
-                    {showCtaWaitlist ? "Hide form" : "Join the early access list"}
-                  </span>
-                </MagneticButton>
-
-                {/* EXPANDING CUSTOM FORM */}
-                <div
-                  className={`transition-all duration-700 overflow-hidden ${
-                    showCtaWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
-                  }`}
-                >
-                  <form
-                    action="https://app.kit.com/forms/8813748/subscriptions"
-                    method="post"
-                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
+                  {/* CTA BUTTON */}
+                  <MagneticButton 
+                    onClick={(buttonElement) => toggleCtaWaitlist(buttonElement)}
                   >
+                    <span className="text-white">
+                      {showCtaWaitlist ? "Hide form" : "Join the early access list"}
+                    </span>
+                  </MagneticButton>
+
+                  {/* EXPANDING CUSTOM FORM */}
+                  <div
+                    className={`transition-all duration-700 overflow-hidden ${
+                      showCtaWaitlist ? "max-h-[600px] mt-6" : "max-h-0"
+                    }`}
+                  >
+                    <form
+                      action="https://app.kit.com/forms/8813748/subscriptions"
+                      method="post"
+                      className="bg-white/10 border border-white/20 rounded-xl p-6 mt-4 max-w-md mx-auto w-full space-y-4"
+                    >
 
                     {/* Redirect to thank-you page */}
                     <input
@@ -694,7 +530,7 @@ export default function MarketingHome() {
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="w-full py-3 bg-[#FF6A1A] hover:bg-[#ff7e3a] transition text-white font-semibold rounded-lg shadow-lg"
+                      className="w-full py-3 bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] hover:opacity-90 transition text-white font-semibold rounded-lg shadow-lg"
                     >
                       Join Early Access
                     </button>
@@ -704,23 +540,25 @@ export default function MarketingHome() {
               </div>
 
               <p className="mt-3 text-[11px] text-white/50">
-                No spam. You’ll only hear from me when Mark is ready for you.
+                No spam. You'll only hear from me when Mark is ready for you.
               </p>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
       {/* ================================================== */}
       {/* BLOG SECTION */}
       {/* ================================================== */}
-      <section className="px-8 py-32 max-w-6xl mx-auto relative z-10 reveal">
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-8">
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#0A0A0A] mb-6">
-            From the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">Blog</span>
+            From the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">Blog</span>
           </h2>
-          <p className="text-lg text-black/70 max-w-2xl mx-auto">
-            Follow along as we <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent font-bold">build in public</span>. Latest updates from the Mark team.
+          <p className="text-lg text-black/60 max-w-2xl mx-auto">
+            Follow along as we <span className="text-[#FF6A1A] font-bold">build in public</span>. Latest updates from the Mark team.
           </p>
         </div>
 
@@ -742,7 +580,7 @@ export default function MarketingHome() {
                 href={`/blog/${post.slug}`}
                 className="group w-full md:w-[calc(50%-1rem)] max-w-md"
               >
-                <article className="h-full bg-white/80 backdrop-blur-md border border-black/10 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                <article className="h-full bg-[#0A0A0A] border border-black/10 rounded-2xl p-6 hover:border-[#FF6A1A]/50 hover:scale-[1.02] transition-all duration-200 shadow-lg">
                   {/* Category Badge */}
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">📝</span>
@@ -753,17 +591,17 @@ export default function MarketingHome() {
 
                   {/* Title */}
                   <h3 
-                    className="text-2xl font-bold text-[#0A0A0A] mb-3 transition line-clamp-2"
+                    className="text-2xl font-bold text-white mb-3 transition line-clamp-2"
                     dangerouslySetInnerHTML={{ __html: post.title }}
                   />
 
                   {/* Excerpt */}
-                  <p className="text-black/70 mb-4 line-clamp-3 leading-relaxed">
+                  <p className="text-white/60 mb-4 line-clamp-3 leading-relaxed">
                     {post.excerpt}
                   </p>
 
                   {/* Meta Info */}
-                  <div className="flex items-center justify-between text-sm text-black/50 pt-4 border-t border-black/5">
+                  <div className="flex items-center justify-between text-sm text-white/40 pt-4 border-t border-white/10">
                     <span>{(() => {
                       const [year, month, day] = post.date.split('-').map(Number);
                       const date = new Date(year, month - 1, day, 12, 0, 0);
@@ -786,7 +624,7 @@ export default function MarketingHome() {
           <div className="text-center mt-12">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-md border border-black/10 rounded-xl font-semibold text-[#0A0A0A] hover:border-[#FF6A1A] hover:text-[#FF6A1A] transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#0A0A0A] border border-black/10 rounded-xl font-semibold text-white hover:border-[#FF6A1A] hover:text-[#FF6A1A] transition-colors duration-200 shadow-lg"
             >
               View All Posts
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -795,32 +633,33 @@ export default function MarketingHome() {
             </Link>
           </div>
         )}
+        </div>
       </section>
 
       {/* ================================================== */}
       {/* FOUNDER MESSAGE */}
       {/* ================================================== */}
-      <section className="px-8 py-28 max-w-4xl mx-auto relative z-10 reveal text-center">
-        <h2 className="text-5xl font-extrabold tracking-tight text-[#0A0A0A] mb-8">
-          A <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">message</span> from the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A4A] bg-clip-text text-transparent">founder</span>
-        </h2>
+      <section className="bg-white py-16 relative z-10">
+        <div className="max-w-4xl mx-auto px-8 text-center">
+          <h2 className="text-5xl font-extrabold tracking-tight text-[#0A0A0A] mb-8">
+            A <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">message</span> from the <span className="bg-gradient-to-r from-[#FF6A1A] to-[#FF8A1A] bg-clip-text text-transparent">founder</span>
+          </h2>
 
-        <p className="text-lg text-black/70 leading-relaxed font-medium">
-          Hey, I'm Brendan. I built Mark because marketers and content creators deserve better tools. The marketing landscape is fragmented—AI tools that don't remember your brand, strategy tools disconnected from execution, and no single system built specifically for people who create and share content online.
-        </p>
+          <p className="text-lg text-black/70 leading-relaxed font-medium">
+            Hey, I'm Brendan. I built Mark because marketers and content creators deserve better tools. The marketing landscape is fragmented—AI tools that don't remember your brand, strategy tools disconnected from execution, and no single system built specifically for people who create and share content online.
+          </p>
 
-        <p className="text-lg text-black/70 leading-relaxed mt-4 font-medium">
-          Mark is my answer to that: a marketing operating system that brings everything together—brand memory, strategic thinking, campaign planning, and daily insights—in one intelligent workspace that learns from you and grows with you.
-        </p>
-
-
+          <p className="text-lg text-black/70 leading-relaxed mt-4 font-medium">
+            Mark is my answer to that: a marketing operating system that brings everything together—brand memory, strategic thinking, campaign planning, and daily insights—in one intelligent workspace that learns from you and grows with you.
+          </p>
+        </div>
       </section>
 
       {/* ================================================== */}
       {/* FOOTER */}
       {/* ================================================== */}
-      <footer className="px-8 py-16 border-t relative z-10">
-        <div className="max-w-6xl mx-auto">
+      <footer className="bg-white py-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-8">
           
           {/* Social Links */}
           <div className="flex justify-center items-center gap-6 mb-8">
@@ -828,10 +667,10 @@ export default function MarketingHome() {
               href="https://x.com/usemarkapp" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg hover:shadow-xl hover:scale-110 transition-all flex items-center justify-center group"
+              className="w-12 h-12 rounded-full bg-black/5 border border-black/10 hover:scale-110 transition-transform duration-200 flex items-center justify-center group"
               aria-label="Follow Mark on X (Twitter)"
             >
-              <svg className="w-5 h-5 text-black/70 group-hover:text-[#FF6A1A] transition" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/50 group-hover:text-[#FF6A1A] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
@@ -840,10 +679,10 @@ export default function MarketingHome() {
               href="https://www.instagram.com/usemarkapp/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg hover:shadow-xl hover:scale-110 transition-all flex items-center justify-center group"
+              className="w-12 h-12 rounded-full bg-black/5 border border-black/10 hover:scale-110 transition-transform duration-200 flex items-center justify-center group"
               aria-label="Follow Mark on Instagram"
             >
-              <svg className="w-5 h-5 text-black/70 group-hover:text-[#FF6A1A] transition" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/50 group-hover:text-[#FF6A1A] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
             </a>
@@ -852,10 +691,10 @@ export default function MarketingHome() {
               href="https://www.tiktok.com/@usemarkapp" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg hover:shadow-xl hover:scale-110 transition-all flex items-center justify-center group"
+              className="w-12 h-12 rounded-full bg-black/5 border border-black/10 hover:scale-110 transition-transform duration-200 flex items-center justify-center group"
               aria-label="Follow Mark on TikTok"
             >
-              <svg className="w-5 h-5 text-black/70 group-hover:text-[#FF6A1A] transition" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/50 group-hover:text-[#FF6A1A] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
               </svg>
             </a>
@@ -864,10 +703,10 @@ export default function MarketingHome() {
               href="https://www.facebook.com/usemarkapp/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg hover:shadow-xl hover:scale-110 transition-all flex items-center justify-center group"
+              className="w-12 h-12 rounded-full bg-black/5 border border-black/10 hover:scale-110 transition-transform duration-200 flex items-center justify-center group"
               aria-label="Follow Mark on Facebook"
             >
-              <svg className="w-5 h-5 text-black/70 group-hover:text-[#FF6A1A] transition" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/50 group-hover:text-[#FF6A1A] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
             </a>
@@ -876,17 +715,17 @@ export default function MarketingHome() {
               href="https://www.youtube.com/@usemarkapp" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg hover:shadow-xl hover:scale-110 transition-all flex items-center justify-center group"
+              className="w-12 h-12 rounded-full bg-black/5 border border-black/10 hover:scale-110 transition-transform duration-200 flex items-center justify-center group"
               aria-label="Subscribe to Mark on YouTube"
             >
-              <svg className="w-5 h-5 text-black/70 group-hover:text-[#FF6A1A] transition" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/50 group-hover:text-[#FF6A1A] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
           </div>
 
           {/* Copyright */}
-          <div className="text-center text-sm text-black/60">
+          <div className="text-center text-sm text-black/50">
             © {new Date().getFullYear()} Mark. Built in public by Brendan Goforth.
           </div>
         </div>
@@ -903,15 +742,39 @@ function FeatureCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div
       className="
-        p-8 rounded-2xl bg-white/70 backdrop-blur-md border border-white/60 shadow-lg
-        tilt-3d hover:shadow-2xl transition-all
+        p-8 rounded-2xl bg-white/95 border border-white/60 shadow-lg
+        hover:scale-[1.02] transition-transform duration-200
       "
     >
+      {/* PERFORMANCE: Removed tilt-3d, hover:shadow-2xl, transition-all */}
       <h3 className="text-3xl font-extrabold text-[#0A0A0A] mb-2">{title}</h3>
       <p className="text-sm text-black/70 leading-relaxed font-medium">
         {desc}
       </p>
     </div>
+  );
+}
+
+/* ================================================== */
+/* MAGNETIC BUTTON */
+/* ================================================== */
+
+/* ================================================== */
+/* SECTION DIVIDER - Subtle gradient separator       */
+/* ================================================== */
+
+function SectionDivider({ variant = "default" }: { variant?: "default" | "orange" | "subtle" }) {
+  const gradientClasses = {
+    default: "from-transparent via-black/10 to-transparent",
+    orange: "from-transparent via-[#FF6A1A]/20 to-transparent",
+    subtle: "from-transparent via-black/5 to-transparent",
+  };
+
+  return (
+    <div 
+      className={`w-full h-px bg-gradient-to-r ${gradientClasses[variant]}`}
+      aria-hidden="true"
+    />
   );
 }
 
